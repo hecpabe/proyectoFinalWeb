@@ -11,11 +11,28 @@
 /* Importado de Bibliotecas */
 // Bibliotecas externas
 const { createLogger, format, transports, config } = require("winston");
+const { MESSAGE } = require("triple-beam");
+const { splat, combine, timestamp, label, printf, simple, colorize } = format;
+
+/* Formatos */
+/* const generalFormat = printf(({ level, message, timestamp }) => {
+    return `LOG (${timestamp}) ${level}: ${message}`;
+}); */
+const generalFormat = format((info) => {
+    const { level, message, timestamp } = info;
+    info[MESSAGE] = `LOG (${timestamp}) ${level}: ${message}`;
+    return info;
+});
 
 /* Loggers */
 // App
 const appLogger = createLogger({
 
+    format: combine(
+        label({ label: "APP", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
     transports: [
         new transports.Console()
     ]
@@ -25,6 +42,11 @@ const appLogger = createLogger({
 // JWT
 const jwtLogger = createLogger({
     
+    format: combine(
+        label({ label: "JWT", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
     transports: [
         new transports.Console()
     ]
@@ -34,6 +56,11 @@ const jwtLogger = createLogger({
 // Nodemailer
 const nodemailerLogger = createLogger({
 
+    format: combine(
+        label({ label: "NODEMAILER", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
     transports: [
         new transports.Console()
     ]
@@ -43,6 +70,11 @@ const nodemailerLogger = createLogger({
 // MongoDB
 const mongoDBLogger = createLogger({
 
+    format: combine(
+        label({ label: "MONGODB", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
     transports: [
         new transports.Console()
     ]
@@ -52,6 +84,11 @@ const mongoDBLogger = createLogger({
 // Sequelize
 const sequelizeLogger = createLogger({
 
+    format: combine(
+        label({ label: "SEQUELIZE", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
     transports: [
         new transports.Console()
     ]
@@ -61,6 +98,11 @@ const sequelizeLogger = createLogger({
 // Admins
 const usersLogger = createLogger({
 
+    format: combine(
+        label({ label: "APP", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
     transports: [
         new transports.Console()
     ]
