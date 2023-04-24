@@ -1,0 +1,78 @@
+GET http://localhost:3000/merchants HTTP/1.1
+
+###
+
+GET http://localhost:3000/merchants/merchantid HTTP/1.1
+
+###
+
+POST http://localhost:3000/merchants/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "merchantname": "tienda",
+    "name": "La tienda ...",
+    "email": "tienda@gmail.com",
+    "password": "1234",
+    "type": "Retail",
+    "country": "España",
+    "city": "Madrid"
+}
+
+###
+
+POST http://localhost:3000/merchants/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "tienda@gmail.com",
+    "password": "1234"
+}
+
+###
+
+POST http://localhost:3000/merchants/restorepassword/email HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "tienda@gmail.com"
+}
+
+###
+
+POST http://localhost:3000/merchants/restorepassword/code HTTP/1.1
+Content-Type: application/json
+
+{
+    "code": "123456"
+}
+
+###
+
+PUT http://localhost:3000/merchants/restorepassword HTTP/1.1
+Content-Type: application/json
+
+{
+    "password": "12345"
+}
+
+###
+
+PUT http://localhost:3000/merchants/merchantid HTTP/1.1
+Content-Type: application/json
+
+{
+    "merchantname": "tienda",
+    "name": "La tienda ...",
+    "email": "tienda@gmail.com",
+    "password": "1234",
+    "type": "Retail",
+    "country": "España",
+    "city": "Madrid"
+}
+
+###
+
+DELETE http://localhost:3000/merchants/merchantid HTTP/1.1
+
+###

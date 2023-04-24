@@ -1,0 +1,30 @@
+GET http://localhost:3000/messages/chatid/startlimit HTTP/1.1
+
+###
+
+GET http://localhost:3000/messages/unread/user/quantity/username HTTP/1.1
+
+###
+
+GET http://localhost:3000/messages/unread/chat/quantity/chatid HTTP/1.1
+
+###
+
+GET http://localhost:3000/messages/unread/chat/chatid HTTP/1.1
+
+###
+
+POST http://localhost:3000/messages HTTP/1.1
+Content-Type: application/json
+
+{
+    "chatID": "1",
+    "type": "1",
+    "content": "Contenido del mensaje"
+}
+
+###
+
+DELETE http://localhost:3000/messages/messageid HTTP/1.1
+
+###

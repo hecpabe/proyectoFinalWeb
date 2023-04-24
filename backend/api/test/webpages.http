@@ -1,0 +1,7 @@
+GET http://localhost:3000/webpages/search/rating/country/city/type/preferences/favs/startlimit HTTP/1.1
+
+###
+
+GET http://localhost:3000/webpages/comercioX/startlimit HTTP/1.1
+
+###

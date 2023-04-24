@@ -1,0 +1,49 @@
+GET http://localhost:3000/admins HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YmFkNDJmY2JkMDNmNzEyYzU3YjkiLCJyb2wiOiJvd25lciIsImlhdCI6MTY4MjM2NTQ2NCwiZXhwIjoxNjgyMzcyNjY0fQ.DIAt5vT22hyD7LY-b_gMHRnR7H-XYP_wund5EW0ZbG8
+
+###
+
+GET http://localhost:3000/admins/6446bad42fcbd03f712c57b9 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YmFkNDJmY2JkMDNmNzEyYzU3YjkiLCJyb2wiOiJvd25lciIsImlhdCI6MTY4MjM1NzAxNywiZXhwIjoxNjgyMzY0MjE3fQ.H0WGSnRIEjreB3RjtOSBrESyv4GmvJRoAqT4TrXD6dY
+
+###
+
+POST http://localhost:3000/admins/register HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YmFkNDJmY2JkMDNmNzEyYzU3YjkiLCJyb2wiOiJvd25lciIsImlhdCI6MTY4MjM2NTQ2NCwiZXhwIjoxNjgyMzcyNjY0fQ.DIAt5vT22hyD7LY-b_gMHRnR7H-XYP_wund5EW0ZbG8
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "name": "Héctor Paredes Benavides 2",
+    "email": "hector.paredes@live.u-tad.com",
+    "password": "Abc123..",
+    "description": "Esta es mi descripción",
+    "avatar": "NONE"
+}
+
+###
+
+PUT http://localhost:3000/admins/6446bad42fcbd03f712c57b9 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YmFkNDJmY2JkMDNmNzEyYzU3YjkiLCJyb2wiOiJvd25lciIsImlhdCI6MTY4MjM1NzAxNywiZXhwIjoxNjgyMzY0MjE3fQ.H0WGSnRIEjreB3RjtOSBrESyv4GmvJRoAqT4TrXD6dY
+Content-Type: application/json
+
+{
+    "username": "owner",
+    "name": "Héctor Paredes Benavides",
+    "email": "hectorpbenavides@gmail.com",
+    "password": "Abc123..",
+    "description": "Esta es mi nueva descripción",
+    "avatar": "NONE"
+}
+
+###
+
+DELETE http://localhost:3000/admins/6446dd552fa9fe672fa44492 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YmFkNDJmY2JkMDNmNzEyYzU3YjkiLCJyb2wiOiJvd25lciIsImlhdCI6MTY4MjM2NTQ2NCwiZXhwIjoxNjgyMzcyNjY0fQ.DIAt5vT22hyD7LY-b_gMHRnR7H-XYP_wund5EW0ZbG8
+
+###
+
+PUT http://localhost:3000/admins/promote/6446d69c231fe9a3eaca547f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YmFkNDJmY2JkMDNmNzEyYzU3YjkiLCJyb2wiOiJvd25lciIsImlhdCI6MTY4MjM2NDU4NywiZXhwIjoxNjgyMzcxNzg3fQ.9mnpdOf_bcifoEtHhRFe6I4q-Qulzkaz0Czm0FWB_5U
+
+###

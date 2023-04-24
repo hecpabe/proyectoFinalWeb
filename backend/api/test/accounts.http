@@ -1,0 +1,42 @@
+PUT http://localhost:3000/accounts/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2ZDY5YzIzMWZlOWEzZWFjYTU0N2YiLCJyb2wiOiJhZG1pbiIsImlhdCI6MTY4MjM2NDA2MCwiZXhwIjoxNjgyMzcxMjYwfQ.0LTqEf5v-Aww9nELb9WjPS9vmFAK3mN79RE6G_W8zKc HTTP/1.1
+
+###
+
+POST http://localhost:3000/accounts/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "owner",
+    "password": "Abc123.."
+}
+
+###
+
+POST http://localhost:3000/accounts/restorepassword/email HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "hector.paredes@live.u-tad.com"
+}
+
+###
+
+POST http://localhost:3000/accounts/restorepassword/code HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2ZDY5YzIzMWZlOWEzZWFjYTU0N2YiLCJjb2RlIjoiODYwOTkzIiwicGFzc3dvcmQiOiIkMmEkMTAkSndjL0F2dmdZSmZ6ZzFQeUN3aTNiTzdlZWVtcFFhb1A1bmpUaGx5cEhsQnE3RHJLRDI1T1MiLCJwYXNzd29yZFJlc3RvcmF0aW9uSUQiOiI2NDQ2ZDdjMmZhODliZDU5MTEyZTQwM2EiLCJtYXhBdHRlbXB0cyI6NSwiaWF0IjoxNjgyMzY0MzU0LCJleHAiOjE2ODIzNjYxNTR9.ki6xWk65WHAV8ogh8ku-xLGKKouGeUHgVUud1ZmemL0
+Content-Type: application/json
+
+{
+    "code": "860993"
+}
+
+###
+
+PUT http://localhost:3000/accounts/restorepassword HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2ZDY5YzIzMWZlOWEzZWFjYTU0N2YiLCJwYXNzd29yZCI6IiQyYSQxMCRKd2MvQXZ2Z1lKZnpnMVB5Q3dpM2JPN2VlZW1wUWFvUDVualRobHlwSGxCcTdEcktEMjVPUyIsInBhc3N3b3JkUmVzdG9yYXRpb25JRCI6IjY0NDZkN2MyZmE4OWJkNTkxMTJlNDAzYSIsImlhdCI6MTY4MjM2NDQwMCwiZXhwIjoxNjgyMzY0NzAwfQ.lGpWREyCB0-zyUwi5gSw5DqR0jxoFuPFdjhwIg7exAs
+Content-Type: application/json
+
+{
+    "password": "Abc123.."
+}
+
+###
