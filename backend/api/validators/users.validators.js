@@ -53,6 +53,10 @@ const validatorCreate = [
     }),
     check("description").exists().notEmpty(),
     check("avatar").exists().notEmpty(),
+    check("country").exists().notEmpty(),
+    check("city").exists().notEmpty(),
+    check("preferences").exists().notEmpty().isArray(),
+    check("allowAdvertising").exists().notEmpty().isBoolean(),
 
     (req, res, next) => {
         return validateResults(req, res, next);

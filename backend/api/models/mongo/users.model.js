@@ -41,6 +41,18 @@ const UsersScheme = new mongoose.Schema(
         avatar: {
             type: String
         },
+        country: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        preferences: {
+            type: String
+        },
+        allowAdvertising: {
+            type: Boolean
+        },
         accountEnabled: {
             type: Boolean
         }

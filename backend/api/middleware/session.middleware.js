@@ -18,6 +18,12 @@ const { jwtLogger } = require("../config/winstonLogger.config");
 
 /* Declaraciones Constantes */
 const PROPERTIES = getProperties();
+const ROLES = {
+    "owner": 0,
+    "admin": 1,
+    "merchant": 2,
+    "user": 2
+};
 
 /* Codificación de Funciones Públicas */
 // Autenticación mediante el token JWT
@@ -216,7 +222,7 @@ const checkSameOrGreaterAdminRol = async (req, res, next) => {
         }
 
         // Comprobamos que el usuario puede realizar la acción
-        if(id != user[PROPERTIES.id] && !(user.rol === "owner" && affectedUser.rol === "admin")){
+        if(id != user[PROPERTIES.id] && !(ROLES[user.rol] < ROLES[affectedUser.rol])){
             handleHTTPError(res, "No tienes permiso para realizar esta acción", UNAUTHORIZED);
             return;
         }

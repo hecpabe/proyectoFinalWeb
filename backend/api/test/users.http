@@ -2,50 +2,16 @@ POST http://localhost:3000/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "@hecpabe",
-    "name": "Héctor Paredes",
+    "username": "hecpabe",
+    "name": "Héctor Paredes Benavides",
     "email": "hectorpbenavides@gmail.com",
-    "password": "test123"
-}
-
-###
-
-POST http://localhost:3000/users/login HTTP/1.1
-Content-Type: application/json
-
-{
-    "email": "hectorpbenavides@gmail.com",
-    "password": "test123"
-}
-
-###
-
-POST http://localhost:3000/users/restorepassword/email HTTP/1.1
-Content-Type: application/json
-
-{
-    "email": "hectorpbenavides@gmail.com"
-}
-
-###
-
-POST http://localhost:3000/users/restorepassword/code HTTP/1.1
-Content-Type: application/json
-
-{
-    "email": "hectorpbenavides@gmail.com",
-    "code": "123456"
-}
-
-###
-
-PUT http://localhost:3000/users/restorepassword HTTP/1.1
-Content-Type: application/json
-
-{
-    "email": "hectorpbenavides@gmail.com",
-    "code": "123456",
-    "password": "test123"
+    "password": "Abc123..",
+    "description": "Esta es mi nueva descripción",
+    "avatar": "NONE",
+    "country": "España",
+    "city": "Madrid",
+    "preferences": ["hotel", "restaurant"],
+    "allowAdvertising": false
 }
 
 ###
@@ -54,27 +20,30 @@ GET http://localhost:3000/users HTTP/1.1
 
 ###
 
-GET http://localhost:3000/users/username HTTP/1.1
+GET http://localhost:3000/users/1 HTTP/1.1
 
 ###
 
-PUT http://localhost:3000/users/username HTTP/1.1
+PUT http://localhost:3000/users/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sIjoidXNlciIsImlhdCI6MTY4MjQzNTk3OCwiZXhwIjoxNjgyNDQzMTc4fQ.n3uNrpEMKaAXU-yB8AaqAfiIYp4bkq_2J593GihFJ1M
 Content-Type: application/json
 
 {
-    "username": "hecpabe",
+    "username": "owner",
     "name": "Héctor Paredes Benavides",
     "email": "hectorpbenavides@gmail.com",
-    "password": "1234",
-    "new_password": "12345",
-    "confirm_new_password": "12345",
+    "password": "Abc123..",
+    "description": "Esta es mi nueva descripción",
+    "avatar": "NONE",
     "country": "España",
     "city": "Madrid",
-    "preferences": ["hotel", "restaurant"]
+    "preferences": ["hotel", "restaurant"],
+    "allowAdvertising": false
 }
 
 ###
 
-DELETE http://localhost:3000/users/username HTTP/1.1
+DELETE http://localhost:3000/users/5 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sIjoidXNlciIsImlhdCI6MTY4MjQzNTk3OCwiZXhwIjoxNjgyNDQzMTc4fQ.n3uNrpEMKaAXU-yB8AaqAfiIYp4bkq_2J593GihFJ1M
 
 ###

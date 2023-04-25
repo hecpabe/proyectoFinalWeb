@@ -14,55 +14,29 @@
 const express = require("express");
 
 // Bibliotecas propias
+const { createUser, getUsers, getUser, updateUser, deleteUser } = require("../controllers/users.controller");
+const { validatorCreate, validatorGetByID } = require("../validators/users.validators");
+const { authMiddleware, checkSameOrGreaterAdminRol } = require("../middleware/session.middleware");
+const { checkRol } = require("../middleware/rol.middleware");
 
 /* Declaraciones Constantes */
 const router = express.Router();
 
 /* Rutas */
-// Login
-router.post("/login", (req, res) => {
-    res.send("Inicio de sesión");
-});
-
 // Register
-router.post("/register", (req, res) => {
-    res.send("Registro de usuarios");
-});
-
-// Recuperación de contraseña [Email que quiere recuperar la contraseña]
-router.post("/restorepassword/email", (req, res) => {
-    res.send("Recuperación de contraseña, paso de email");
-});
-
-// Recuperación de contraseña [Confirmar código de recuperación para garantizar la autenticación de la persona]
-router.post("/restorepassword/code", (req, res) => {
-    res.send("Recuperación de contraseña, paso de código");
-});
-
-// Recuperación de contraseña [Restaurar una contraseña nueva]
-router.put("/restorepassword", (req, res) => {
-    res.send("Recuperación de contraseña, restaurar contraseña");
-});
+router.post("/register", validatorCreate, createUser("user"));
 
 // Obtención de todos los usuarios
-router.get("/", (req, res) => {
-    res.send("Obtención de todos los usuarios");
-});
+router.get("/", getUsers("all"));
 
 // Obtención de los datos de un usuario
-router.get("/:username", (req, res) => {
-    res.send("Obtención de un usuario");
-});
+router.get("/:id", validatorGetByID, getUser("all"));
 
 // Modificación de un usuario
-router.put("/:username", (req, res) => {
-    res.send("Modificación de un usuario");
-});
+router.put("/:id", validatorGetByID, validatorCreate, authMiddleware, checkRol(["user", "admin", "owner"]), checkSameOrGreaterAdminRol, updateUser);
 
 // Borrado de un usuario
-router.delete("/:username", (req, res) => {
-    res.send("Borrado de un usuario");
-});
+router.delete("/:id", validatorGetByID, authMiddleware, checkRol(["user", "admin", "owner"]), checkSameOrGreaterAdminRol, deleteUser);
 
 /* Exportado de Módulo */
 module.exports = router;

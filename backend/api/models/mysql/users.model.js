@@ -51,6 +51,18 @@ const Users = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        country: {
+            type: DataTypes.STRING
+        },
+        city: {
+            type: DataTypes.STRING
+        },
+        preferences: {
+            type: DataTypes.STRING
+        },
+        allowAdvertising: {
+            type: DataTypes.BOOLEAN
+        },
         accountEnabled: {
             type: DataTypes.BOOLEAN,
             allowNull: false

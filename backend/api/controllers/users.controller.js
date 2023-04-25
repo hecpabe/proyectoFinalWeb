@@ -40,9 +40,12 @@ const getUsers = (rol) => async (req, res) => {
             await usersModel.selectAll() :
             await usersModel.selectAllWhere({ rol: rol });
 
-        // Quitamos las contraseñas antes de mandar los usuarios
+        // Quitamos las contraseñas y transformamos las preferencias a array antes de mandar los usuarios
         data.forEach(element => {
             element.set("password", undefined, { strict: false });
+            element.set("preferences", element.preferences.split(',').filter((element) => {
+                return element.length > 0;
+            }), { strict: false });
         });
 
         handleHTTPResponse(res, "Usuarios obtenidos con éxito", data);
@@ -80,6 +83,9 @@ const getUser = (rol) => async (req, res) => {
 
             data.forEach(element => {
                 element.set("password", undefined, { strict: false });
+                element.set("preferences", element.preferences.split(',').filter((element) => {
+                    return element.length > 0;
+                }), { strict: false });
             })
 
         }
@@ -92,6 +98,9 @@ const getUser = (rol) => async (req, res) => {
             }
 
             data.set("password", undefined, { strict: false });
+            data.set("preferences", data.preferences.split(',').filter((element) => {
+                return element.length > 0;
+            }), { strict: false });
 
         }
 
@@ -137,11 +146,14 @@ const createUser = (rol) => async (req, res) => {
 
         // Generamos la contraseña hasheada, la cambiamos en el body y creamos al nuevo usuario
         const hashedPassword = await hashPassword(req.password);
-        const body = { ...req, password: hashedPassword, rol: rol, avatar: "NONE", accountEnabled: false };
+        const body = { ...req, password: hashedPassword, rol: rol, avatar: "NONE", accountEnabled: false, preferences: req.preferences.toString() };
         const dataUser = await usersModel.insert(body);
 
-        // Eliminamos el atributo password de la contraseña para no mandarla
+        // Eliminamos el atributo password de la contraseña para no mandarla, y transformamos las preferencias a array
         dataUser.set("password", undefined, { strict: false });
+        dataUser.set("preferences", dataUser.preferences.split(',').filter((element) => {
+            return element.length > 0;
+        }), { strict: false });
 
         // Mandamos el token de sesión junto a la información del usuario
         const mailOptions = {
@@ -210,6 +222,9 @@ const loginUser = async (req, res) => {
 
         // Devolvemos el usuario
         user.set("password", undefined, { strict: false });
+        user.set("preferences", user.preferences.split(',').filter((element) => {
+            return element.length > 0;
+        }), { strict: false });
         const data = {
             token: tokenSign(user),
             user
@@ -425,7 +440,7 @@ const updateUser = async (req, res) => {
             ]
         });
 
-        if(process.env.DB_ENGINE === "mysql")
+        if(process.env.DB_ENGINE === "mysql"){
             if(
                 otherUsers.length > 1 || 
                 (
@@ -433,9 +448,10 @@ const updateUser = async (req, res) => {
                     otherUsers[0][PROPERTIES.id] != userBeforeUpdate[PROPERTIES.id]
                 )
             ){
-                handleHTTPError(res, "El usuario o email introducidos no son válidossssss");
+                handleHTTPError(res, "El usuario o email introducidos no son válidos");
                 return;
             }
+        }
         else
             if(
                 otherUsers.length > 1 || 
@@ -444,12 +460,15 @@ const updateUser = async (req, res) => {
                     otherUsers[0][PROPERTIES.id].toHexString() != userBeforeUpdate[PROPERTIES.id].toHexString()
                 )
             ){
-                handleHTTPError(res, "El usuario o email introducidos no son válidossssss");
+                handleHTTPError(res, "El usuario o email introducidos no son válidos");
                 return;
             }
 
         // Hasheamos la nueva contraseña
         body.password = await hashPassword(body.password);
+
+        // Transformamos el array de preferencias
+        body.preferences = body.preferences.toString();
 
         // Realizamos el update
         const data = await usersModel.updateByID(id, body);
