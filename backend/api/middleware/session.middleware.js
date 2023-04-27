@@ -12,7 +12,7 @@
 // Bibliotecas propias
 const { handleHTTPError, UNAUTHORIZED, NOT_FOUND, INTERNAL_SERVER_ERROR } = require("../utils/handleResponse.util");
 const { verifyToken } = require("../utils/handleJWT.util");
-const { usersModel } = require("../models/index");
+const { usersModel, merchantsModel } = require("../models/index");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");
 const { jwtLogger } = require("../config/winstonLogger.config");
 
@@ -47,13 +47,30 @@ const authMiddleware = async (req, res, next) => {
             return;
         }
 
-        // Obtenemos al usuario, comprobamos que la cuenta esté activada y lo pasamos a los siguientes pasos
-        const user = await usersModel.selectOne(tokenData[PROPERTIES.id]);
-        if(!user.accountEnabled){
-            handleHTTPError(res, "Tu cuenta no está activada, actívala para poder usar la aplicación", UNAUTHORIZED);
-            return;
+        // Comprobamos si es un usuario o un comerciante
+        if(tokenData.rol){
+
+            // Obtenemos al usuario, comprobamos que la cuenta esté activada y lo pasamos a los siguientes pasos
+            const user = await usersModel.selectOne(tokenData[PROPERTIES.id]);
+            if(!user.accountEnabled){
+                handleHTTPError(res, "Tu cuenta no está activada, actívala para poder usar la aplicación", UNAUTHORIZED);
+                return;
+            }
+            req.user = user;
+
         }
-        req.user = user;
+        else{
+
+            // Obtenemos al comerciante, comprobamos que la cuenta esté activada y aceptada y lo pasamos a los siguientes pasos
+            const user = await merchantsModel.selectOne(tokenData[PROPERTIES.id]);
+            if(!user.accountEnabled || !user.accountAccepted){
+                handleHTTPError(res, "Tu cuenta no está activada y aceptada, actívala y espera a que sea aceptada por un administrador para poder usar la aplicación", UNAUTHORIZED);
+                return;
+            }
+            user.rol = "merchant";
+            req.user = user;
+
+        }
 
         next();
 
@@ -108,7 +125,7 @@ const activateAccountMiddleware = async (req, res, next) => {
 }
 
 // Autenticación de recuperación de contraseña (Código) mediante el token JWT
-const passwordRestorationEmailAuthMiddleware = async (req, res, next) => {
+const passwordRestorationEmailAuthMiddleware = (target) => async (req, res, next) => {
 
     try{
 
@@ -141,7 +158,9 @@ const passwordRestorationEmailAuthMiddleware = async (req, res, next) => {
         req.restorationCode = tokenData.code;
 
         // Obtenemos al usuario, comprobamos que la cuenta esté activada y lo pasamos a los siguientes pasos
-        const user = await usersModel.selectOne(tokenData[PROPERTIES.id]);
+        const user = target === "merchant" ? 
+            await merchantsModel.selectOne(tokenData[PROPERTIES.id]) :
+            await usersModel.selectOne(tokenData[PROPERTIES.id]);
         if(!user.accountEnabled){
             handleHTTPError(res, "Tu cuenta no está activada, actívala para poder usar la aplicación", UNAUTHORIZED);
             return;
@@ -161,7 +180,7 @@ const passwordRestorationEmailAuthMiddleware = async (req, res, next) => {
 }
 
 // Autenticación de recuperación de contraseña (Contraseña) mediante el token JWT
-const passwordRestorationPasswordAuthMiddleware = async (req, res, next) => {
+const passwordRestorationPasswordAuthMiddleware = (target) => async (req, res, next) => {
 
     try{
 
@@ -186,7 +205,9 @@ const passwordRestorationPasswordAuthMiddleware = async (req, res, next) => {
         req.passwordRestorationID = tokenData.passwordRestorationID;
 
         // Obtenemos al usuario, comprobamos que la cuenta esté activada y lo pasamos a los siguientes pasos
-        const user = await usersModel.selectOne(tokenData[PROPERTIES.id]);
+        const user = target === "merchant" ? 
+            await merchantsModel.selectOne(tokenData[PROPERTIES.id]) :
+            await usersModel.selectOne(tokenData[PROPERTIES.id]);
         if(!user.accountEnabled){
             handleHTTPError(res, "Tu cuenta no está activada, actívala para poder usar la aplicación", UNAUTHORIZED);
             return;
@@ -206,14 +227,18 @@ const passwordRestorationPasswordAuthMiddleware = async (req, res, next) => {
 }
 
 // Función con la que comprobamos que el usuario que está haciendo una acción es él mismo o uno con un permiso superior
-const checkSameOrGreaterAdminRol = async (req, res, next) => {
+const checkSameOrGreaterAdminRol = (target) => async (req, res, next) => {
 
     try{
 
         // Obtenemos el usuario afectado
         const { id } = req.params;
         const { user } = req;
-        const affectedUser = await usersModel.selectOne(id);
+        
+        // Obtenemos el usuario o el comerciante
+        const affectedUser = target === "merchant" ? 
+            await merchantsModel.selectOne(id) :
+            await usersModel.selectOne(id);
 
         // Comprobamos que el usuario existe
         if(!affectedUser){
@@ -221,8 +246,10 @@ const checkSameOrGreaterAdminRol = async (req, res, next) => {
             return;
         }
 
+        affectedUser.rol = target === "merchant" ? target : affectedUser.rol;
+
         // Comprobamos que el usuario puede realizar la acción
-        if(id != user[PROPERTIES.id] && !(ROLES[user.rol] < ROLES[affectedUser.rol])){
+        if((id != user[PROPERTIES.id] || affectedUser.rol != user.rol) && !(ROLES[user.rol] < ROLES[affectedUser.rol])){
             handleHTTPError(res, "No tienes permiso para realizar esta acción", UNAUTHORIZED);
             return;
         }
@@ -240,11 +267,52 @@ const checkSameOrGreaterAdminRol = async (req, res, next) => {
 
 }
 
+// Autenticación para la activación de un comerciante mediante el token JWT
+const activateMerchantMiddleware = async (req, res, next) => {
+
+    try{
+
+        const { token } = req.params;
+
+        // Comprobamos que exista el token de sesión
+        if(!token){
+            handleHTTPError(res, "No estás autenticado", UNAUTHORIZED);
+            return;
+        }
+
+        // Obtenemos el Payload del token
+        const tokenData = verifyToken(token);
+        if(!tokenData){
+            handleHTTPError(res, "Token no válido", UNAUTHORIZED);
+            return;
+        }
+
+        // Obtenemos al comerciante, comprobamos que la cuenta no esté activada y lo pasamos a los siguientes pasos
+        const merchant = await merchantsModel.selectOne(tokenData[PROPERTIES.id]);
+        if(merchant.accountEnabled){
+            handleHTTPError(res, "Tu cuenta ya ha sido activada", NOT_FOUND);
+            return;
+        }
+        req.merchant = merchant;
+
+        next();
+
+    }
+    catch(err){
+
+        jwtLogger.error("ERROR [session.middleware / activateMerchantMiddleware]: " + err);
+        handleHTTPError(res, "Sesión no válida", UNAUTHORIZED);
+
+    }
+
+}
+
 /* Exportado de Módulo */
 module.exports = {
     authMiddleware,
     activateAccountMiddleware,
     passwordRestorationEmailAuthMiddleware,
     passwordRestorationPasswordAuthMiddleware,
-    checkSameOrGreaterAdminRol
+    checkSameOrGreaterAdminRol,
+    activateMerchantMiddleware
 };

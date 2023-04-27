@@ -44,10 +44,10 @@ router.get("/:id", validatorGetByID, authMiddleware, checkRol(["admin", "owner"]
 router.post("/register", validatorCreate, authMiddleware, checkRol(["owner"]), createUser("admin"));
 
 // Modificación de un admin
-router.put("/:id", validatorGetByID, validatorCreate, authMiddleware, checkRol(["admin", "owner"]), checkSameOrGreaterAdminRol, updateUser);
+router.put("/:id", validatorGetByID, validatorCreate, authMiddleware, checkRol(["admin", "owner"]), checkSameOrGreaterAdminRol("admin"), updateUser);
 
 // Borrado de un admin
-router.delete("/:id", validatorGetByID, authMiddleware, checkRol(["admin", "owner"]), checkSameOrGreaterAdminRol, deleteUser);
+router.delete("/:id", validatorGetByID, authMiddleware, checkRol(["admin", "owner"]), checkSameOrGreaterAdminRol("admin"), deleteUser);
 
 // Ascenso de un admin a owner
 router.put("/promote/:id", validatorGetByID, authMiddleware, checkRol(["owner"]), promoteUser("owner"));

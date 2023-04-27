@@ -21,9 +21,7 @@ const checkRol = (rolesAllowed) => (req, res, next) => {
 
         // Obtenemos el rol del usuario
         const { user } = req;
-        const userRol = user.rol;
-
-        console.log(user.rol);
+        const userRol = user.rol === undefined ? "merchant" : user.rol;
 
         // Comprobamos que el rol del usuario permita realizar la acción
         if(!rolesAllowed.includes(userRol)){

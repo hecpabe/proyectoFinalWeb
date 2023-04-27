@@ -1,22 +1,22 @@
 
 
 /*
-    Título: Users Model
+    Título: Merchants Model
     Nombre: Héctor Paredes Benavides
-    Descripción: Creamos un módulo para gestionar el modelo de users para MongoDB con Mongoose
-    Fecha: 18/4/2023
-    Última Modificación: 18/4/2023
+    Descripción: Creamos un módulo para gestionar el modelo de comerciantes de MongoDB
+    Fecha: 27/4/2023
+    Última Modificación: 27/4/2023
 */
 
 /* Importado de Bibliotecas */
 // Bibliotecas externas
 const mongoose = require("mongoose");
 
-/* Esquema de Usuarios */
-const UsersScheme = new mongoose.Schema(
+/* Esquema de Comerciantes */
+const MerchantsScheme = mongoose.Schema(
 
     {
-        username: {
+        merchantname: {
             type: String,
             unique: true
         },
@@ -30,16 +30,13 @@ const UsersScheme = new mongoose.Schema(
         password: {
             type: String
         },
-        rol: {
+        cif: {
             type: String,
-            enum: ["user", "admin", "owner"],
-            default: "owner"
+            unique: true
         },
-        description: {
-            type: String
-        },
-        avatar: {
-            type: String
+        phone: {
+            type: String,
+            unique: true
         },
         country: {
             type: String
@@ -47,13 +44,13 @@ const UsersScheme = new mongoose.Schema(
         city: {
             type: String
         },
-        preferences: {
+        address: {
             type: String
         },
-        allowAdvertising: {
+        accountEnabled: {
             type: Boolean
         },
-        accountEnabled: {
+        accountAccepted: {
             type: Boolean
         }
     },
@@ -66,13 +63,13 @@ const UsersScheme = new mongoose.Schema(
 
 /* Codificación de Funciones */
 // Creación de adaptadores para realizar las mismas funciones tanto en MySQL como en MongoDB
-// Obtener todos los admines
-UsersScheme.statics.selectAll = function(){
+// Obtener todos los comerciantes
+MerchantsScheme.statics.selectAll = function(){
     return this.find({});
 }
 
-// Obtener todos los admines con restricción
-UsersScheme.statics.selectAllWhere = function(conditions){
+// Obtener todos los comerciantes con restricción
+MerchantsScheme.statics.selectAllWhere = function(conditions){
 
     // Variables necesarias
     var processedConditions = {}
@@ -105,26 +102,26 @@ UsersScheme.statics.selectAllWhere = function(conditions){
     return this.find(processedConditions);
 }
 
-// Obtener un admin
-UsersScheme.statics.selectOne = function(id){
+// Obtener un comerciante
+MerchantsScheme.statics.selectOne = function(id){
     return this.findById(id);
 }
 
-// Crear un admin
-UsersScheme.statics.insert = function(body){
+// Crear un comerciante
+MerchantsScheme.statics.insert = function(body){
     return this.create(body);
 }
 
-// Modificar un admin
-UsersScheme.statics.updateByID = function(id, body){
+// Modificar un comerciante
+MerchantsScheme.statics.updateByID = function(id, body){
     return this.findByIdAndUpdate(id, body);
 }
 
-// Eliminar un admin
-UsersScheme.statics.deleteByID = async function(id){
+// Eliminar un comerciante
+MerchantsScheme.statics.deleteByID = async function(id){
     const data = await this.deleteOne({ _id: id });
     return data["acknowledged"] ? "OK" : "NOT_FOUND";
 }
 
 /* Exportado de Módulo */
-module.exports = mongoose.model("users", UsersScheme);
+module.exports = mongoose.model("merchants", MerchantsScheme);

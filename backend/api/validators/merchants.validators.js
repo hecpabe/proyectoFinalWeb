@@ -1,15 +1,15 @@
 
 
 /*
-    Título: Users Validator
+    Título: Merchants Validators
     Nombre: Héctor Paredes Benavides
-    Descripción: Creamos un módulo para el middleware de validación de usuarios
-    Fecha: 20/4/2023
-    Última Modificación: 20/4/2023
+    Descripción: Creamos un módulo para gestionar los validadores de los comerciantes
+    Fecha: 25/4/2023
+    Última Modificación: 25/4/2023
 */
 
-/* Importado de bibliotecas */
-// Bibliotecas externas
+/* Importado de Bibliotecas */
+// Bibliotecas externas 
 const { check } = require("express-validator");
 
 // Bibliotecas propias
@@ -18,8 +18,8 @@ const { validateResults } = require("../utils/handleValidator.util");
 /* Declaraciones Constantes */
 const DB_ENGINE = process.env.DB_ENGINE;
 
-const USERNAME_MIN_LENGTH = 3;
-const USERNAME_MAX_LENGTH = 20;
+const MERCHANTNAME_MIN_LENGTH = 3;
+const MERCHANTNAME_MAX_LENGTH = 20;
 const NAME_MIN_LENGTH = 3;
 const NAME_MAX_LENGTH = 75;
 const PASSWORD_MIN_LENGTH = 8;
@@ -29,12 +29,12 @@ const PASSWORD_MIN_NUMBERS = 1;
 const PASSWORD_MIN_SYMBOLS = 1;
 
 /* Validaciones */
-// Obtención de usuarios (por id)
+// Obtención de comerciantes por id
 const validatorGetByID = [
 
-    DB_ENGINE === "nosql" ?
-        check("id").exists().notEmpty().isMongoId() :
-        check("id").exists().notEmpty(),
+    DB_ENGINE === "mysql" ?
+        check("id").exists().notEmpty() :
+        check("id").exists().notEmpty().isMongoId(),
     
     (req, res, next) => {
         return validateResults(req, res, next);
@@ -42,10 +42,10 @@ const validatorGetByID = [
 
 ];
 
-// Creación de usuarios
+// Registro de comerciantes
 const validatorCreate = [
 
-    check("username").exists().notEmpty().isLength({ min: USERNAME_MIN_LENGTH, max: USERNAME_MAX_LENGTH }),
+    check("merchantname").exists().notEmpty().isLength({ min: MERCHANTNAME_MIN_LENGTH, max: MERCHANTNAME_MAX_LENGTH }),
     check("name").exists().notEmpty().isLength({ min: NAME_MIN_LENGTH, max: NAME_MAX_LENGTH }),
     check("email").exists().notEmpty().isEmail(),
     check("password").exists().notEmpty().isStrongPassword({
@@ -55,12 +55,11 @@ const validatorCreate = [
         minNumbers: PASSWORD_MIN_NUMBERS,
         minSymbols: PASSWORD_MIN_SYMBOLS
     }),
-    check("description").exists().notEmpty(),
-    check("avatar").exists().notEmpty(),
+    check("cif").exists().notEmpty(),
+    check("phone").exists().notEmpty().isMobilePhone(),
     check("country").exists().notEmpty(),
     check("city").exists().notEmpty(),
-    check("preferences").exists().notEmpty().isArray(),
-    check("allowAdvertising").exists().notEmpty().isBoolean(),
+    check("address").exists().notEmpty(),
 
     (req, res, next) => {
         return validateResults(req, res, next);
@@ -68,10 +67,10 @@ const validatorCreate = [
 
 ];
 
-// Inicio de sesión de usuarios
+// Inicio de sesión de comerciantes
 const validatorLogin = [
 
-    check("username").exists().notEmpty(),
+    check("merchantname").exists().notEmpty(),
     check("password").exists().notEmpty(),
 
     (req, res, next) => {
@@ -80,7 +79,7 @@ const validatorLogin = [
 
 ];
 
-// Recuperación de contraseña (email)
+// Recuperación de contraseña (Email)
 const validatorRestorePasswordEmail = [
 
     check("email").exists().notEmpty().isEmail(),
@@ -91,7 +90,7 @@ const validatorRestorePasswordEmail = [
 
 ];
 
-// Recuperación de contraseña (código)
+// Recuperación de contraseña (Código)
 const validatorRestorePasswordCode = [
 
     check("code").exists().notEmpty(),
@@ -102,7 +101,7 @@ const validatorRestorePasswordCode = [
 
 ];
 
-// Recuperación de contraseña (contraseña)
+// Recuperación de contraseña (Contraseña)
 const validatorRestorePasswordPassword = [
 
     check("password").exists().notEmpty().isStrongPassword({

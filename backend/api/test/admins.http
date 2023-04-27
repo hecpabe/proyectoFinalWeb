@@ -28,7 +28,7 @@ Content-Type: application/json
 ###
 
 PUT http://localhost:3000/admins/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI0MzUwNDMsImV4cCI6MTY4MjQ0MjI0M30.yOCHuDi4mdXMm6aa4amU14_OoRS8Ad7nn8MhVNvdWC4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI2MjYzMzksImV4cCI6MTY4MjYzMzUzOX0.awVG66E5i6ukZ84jPhG7joQWbUa4sFoQ-4dTm9aMTaU
 Content-Type: application/json
 
 {

@@ -1,11 +1,11 @@
 
 
 /*
-    Título: Users Model
+    Título: Merchants Model
     Nombre: Héctor Paredes Benavides
-    Descripción: Creamos un módulo para gestionar el modelo de usuarios para SQL con Sequelize
-    Fecha: 3/4/2023
-    Última Modificación: 18/4/2023
+    Descripción: Creamos un módulo para gestionar el modelo de comerciantes para MySQL
+    Fecha: 25/4/2023
+    Última Modificación: 25/4/2023
 */
 
 /* Importado de Bibliotecas */
@@ -14,13 +14,14 @@ const { DataTypes } = require("sequelize");
 
 // Bibliotecas propias
 const { sequelize } = require("../../config/mysql.config");
-const { normalizeJSONForSequelize } = require("../../utils/handleJSON.util")
+const { normalizeJSONForSequelize } = require("../../utils/handleJSON.util");
 
-/* Modelo de Usuarios */
-const Users = sequelize.define(
-    "users",
+/* Modelo de Comerciantes */
+const Merchants = sequelize.define(
+
+    "merchants",
     {
-        username: {
+        merchantname: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
@@ -36,34 +37,35 @@ const Users = sequelize.define(
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
-        rol: {
-            type: DataTypes.ENUM,
-            values: ["user", "merchant", "admin", "owner"],
-            defaultValue: "user"
-        },
-        description: {
+        cif: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
-        avatar: {
+        phone: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         country: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         city: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        preferences: {
-            type: DataTypes.STRING
-        },
-        allowAdvertising: {
-            type: DataTypes.BOOLEAN
+        address: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         accountEnabled: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        accountAccepted: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         }
@@ -71,43 +73,44 @@ const Users = sequelize.define(
     {
         timestamps: true
     }
+
 );
 
 /* Codificación de Funciones */
 // Creación de adaptadores para realizar las mismas funciones tanto en MySQL como en MongoDB
 // Obtener todos los usuarios
-Users.selectAll = function(){
-    return Users.findAll();
+Merchants.selectAll = function(){
+    return Merchants.findAll();
 }
 
 // Obtener todos los usuarios con restricción
-Users.selectAllWhere = function(conditions){
-    return Users.findAll({ where: conditions });
+Merchants.selectAllWhere = function(conditions){
+    return Merchants.findAll({ where: conditions });
 }
 
 // Obtener un usuario
-Users.selectOne = function(id){
-    return Users.findOne({ where: { id: id } });
+Merchants.selectOne = function(id){
+    return Merchants.findOne({ where: { id: id } });
 }
 
 // Crear un usuario
-Users.insert = function(body){
-    return Users.create(normalizeJSONForSequelize(body));
+Merchants.insert = function(body){
+    return Merchants.create(normalizeJSONForSequelize(body));
 }
 
 // Modificar un usuario
-Users.updateByID = function(id, body){
-    return Users.update(
+Merchants.updateByID = function(id, body){
+    return Merchants.update(
         normalizeJSONForSequelize(body),
         { where: { id: id } }
     );
 }
 
 // Eliminar un usuario
-Users.deleteByID = async function(id){
+Merchants.deleteByID = async function(id){
     
     // Realizamos la operación
-    var result = await Users.destroy({ where: { id: id } });
+    var result = await Merchants.destroy({ where: { id: id } });
 
     // Mandamos la respuesta en función del resultado
     if(result === 1)
@@ -118,4 +121,4 @@ Users.deleteByID = async function(id){
 }
 
 /* Exportado de Módulo */
-module.exports = Users;
+module.exports = Merchants;

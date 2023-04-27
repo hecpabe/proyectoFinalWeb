@@ -13,7 +13,9 @@ const path = process.env.DB_ENGINE === "nosql" ? "./mongo" : "./mysql";
 
 const models = {
     usersModel: require(path + "/users.model"),
-    passwordRestorationsModel: require(path + "/passwordRestorations.model")
+    passwordRestorationsModel: require(path + "/passwordRestorations.model"),
+    merchantsModel: require(path + "/merchants.model"),
+    merchantsPasswordRestorationsModel: require(path + "/merchantsPasswordRestorations.model")
 }
 
 /* Exportado de Módulos */

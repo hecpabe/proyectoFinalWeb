@@ -77,7 +77,7 @@ const getUser = (rol) => async (req, res) => {
 
             // Si no se ha encontrado el usuario mandamos un mensaje diferente
             if(data.length <= 0){
-                handleHTTPResponse(res, "No existe el usuario buscado", undefined);
+                handleHTTPError(res, "No existe el usuario buscado", NOT_FOUND);
                 return;
             }
 
@@ -93,7 +93,7 @@ const getUser = (rol) => async (req, res) => {
 
             // Si no se ha encontrado el usuario mandamos un mensaje diferente
             if(!data){
-                handleHTTPResponse(res, "No existe el usuario buscado2", undefined);
+                handleHTTPError(res, "No existe el usuario buscado", NOT_FOUND);
                 return;
             }
 
@@ -146,7 +146,7 @@ const createUser = (rol) => async (req, res) => {
 
         // Generamos la contraseña hasheada, la cambiamos en el body y creamos al nuevo usuario
         const hashedPassword = await hashPassword(req.password);
-        const body = { ...req, password: hashedPassword, rol: rol, avatar: "NONE", accountEnabled: false, preferences: req.preferences.toString() };
+        const body = { ...req, password: hashedPassword, rol: rol, accountEnabled: false, preferences: req.preferences.toString() };
         const dataUser = await usersModel.insert(body);
 
         // Eliminamos el atributo password de la contraseña para no mandarla, y transformamos las preferencias a array
@@ -222,7 +222,8 @@ const loginUser = async (req, res) => {
 
         // Devolvemos el usuario
         user.set("password", undefined, { strict: false });
-        user.set("preferences", user.preferences.split(',').filter((element) => {
+        if(user.preferences != undefined)
+            user.set("preferences", user.preferences.split(',').filter((element) => {
             return element.length > 0;
         }), { strict: false });
         const data = {
@@ -263,10 +264,10 @@ const restorePasswordEmail = async (req, res) => {
             user.passwordRestorationID = -1;
         }
 
-        // Generamos un código y se lo incrustamos al admin para meterlo en JWT y mandarlo por correo
+        // Generamos un código y se lo incrustamos al usuario para meterlo en JWT y mandarlo por correo
         user.code = generateRandomCode(RESTORE_PASSWORD_CODE_LENGTH);
 
-        // Si el admin existe mandamos el correo
+        // Si el usuario existe mandamos el correo
         if(user[PROPERTIES.id] != -1){
 
             // Variables necesarias
@@ -281,7 +282,7 @@ const restorePasswordEmail = async (req, res) => {
             await nodemailerTransporter.sendMail(mailOptions, (error, info) => {
 
                 if(error){
-                    nodemailerLogger.error("ERROR [admins.controller / restorePasswordEmail]: " + error);
+                    nodemailerLogger.error("ERROR [users.controller / restorePasswordEmail]: " + error);
                     handleHTTPError(res, "No se ha podido iniciar la recuperación de contraseña", INTERNAL_SERVER_ERROR);
                     return;
                 }
@@ -433,12 +434,19 @@ const updateUser = async (req, res) => {
         body.rol = userBeforeUpdate.rol;
 
         // Comprobamos que no haya otros usuarios con el mismo username o email
-        const otherUsers = await usersModel.selectAllWhere({
-            [Op.or]: [
-                { username: body.username },
-                { email: body.email }
-            ]
-        });
+        const otherUsers = process.env.DB_ENGINE === "mysql" ?
+            await usersModel.selectAllWhere({
+                [Op.or]: [
+                    { username: body.username },
+                    { email: body.email }
+                ]
+            }) :
+            await usersModel.find({
+                $or: [
+                    { username: body.username },
+                    { email: body.email }
+                ]
+            });
 
         if(process.env.DB_ENGINE === "mysql"){
             if(

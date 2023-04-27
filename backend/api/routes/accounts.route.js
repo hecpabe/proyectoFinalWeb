@@ -22,7 +22,7 @@ const {
     validatorLogin
 } = require("../validators/users.validators");
 
-    const { 
+const { 
     activateAccountMiddleware, 
     passwordRestorationEmailAuthMiddleware, 
     passwordRestorationPasswordAuthMiddleware 
@@ -42,10 +42,10 @@ router.post("/login", validatorLogin, loginUser);
 router.post("/restorepassword/email", validatorRestorePasswordEmail, restorePasswordEmail);
 
 // Recuperación de contraseña de un admin [Código]
-router.post("/restorepassword/code", passwordRestorationEmailAuthMiddleware, validatorRestorePasswordCode, restorePasswordCode);
+router.post("/restorepassword/code", validatorRestorePasswordCode, passwordRestorationEmailAuthMiddleware("user"), restorePasswordCode);
 
 // Recuperación de contraseña de un admin [Contraseña]
-router.put("/restorepassword", passwordRestorationPasswordAuthMiddleware, validatorRestorePasswordPassword, restorePassword);
+router.put("/restorepassword", validatorRestorePasswordPassword, passwordRestorationPasswordAuthMiddleware("user"), restorePassword);
 
 /* Exportado de Módulo */
 module.exports = router;

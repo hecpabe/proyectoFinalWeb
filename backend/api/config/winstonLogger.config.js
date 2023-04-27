@@ -95,11 +95,25 @@ const sequelizeLogger = createLogger({
 
 });
 
-// Admins
+// Usuarios
 const usersLogger = createLogger({
 
     format: combine(
-        label({ label: "APP", message: true }),
+        label({ label: "USERS", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
+    transports: [
+        new transports.Console()
+    ]
+
+});
+
+// Comerciantes
+const merchantsLogger = createLogger({
+
+    format: combine(
+        label({ label: "MERCHANTS", message: true }),
         timestamp(),
         generalFormat()
     ),
@@ -116,5 +130,6 @@ module.exports = {
     nodemailerLogger,
     mongoDBLogger,
     sequelizeLogger,
-    usersLogger
+    usersLogger,
+    merchantsLogger
 }
