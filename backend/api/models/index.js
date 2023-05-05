@@ -17,7 +17,8 @@ const models = {
     merchantsModel: require(path + "/merchants.model"),
     merchantsPasswordRestorationsModel: require(path + "/merchantsPasswordRestorations.model"),
     webpagesModel: require(path + "/webpages.model"),
-    reviewsModel: require(path + "/reviews.model")
+    reviewsModel: require(path + "/reviews.model"),
+    postsModel: require(path + "/posts.model")
 }
 
 /* Exportado de Módulos */

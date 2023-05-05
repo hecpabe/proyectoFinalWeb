@@ -16,16 +16,16 @@ GET http://localhost:3000/webpages/1 HTTP/1.1
 ###
 
 POST http://localhost:3000/webpages HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgyODc4MDExLCJleHAiOjE2ODI4ODUyMTF9.eZ6WMEbRA4-yaWXOAAP1OuovlqjgSbRFJ1z_Tng7G0g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg5NzAzLCJleHAiOjE2ODMyOTY5MDN9.nJwq6Bw59OzanEfU9cVpTm8pDzFI-QXkVqGCv-EPjLM
 Content-Type: application/json
 
 {
-    "name": "La tienda ... Sucursal 3",
+    "name": "La tienda ... Sucursal",
     "type": "Ropa",
     "avatar": "NONE",
-    "country": "Reino Unido",
-    "city": "Londres",
-    "address": "C/ Wolf Street 8",
+    "country": "España",
+    "city": "Madrid",
+    "address": "C/ Gran Vía 8",
     "phone": "123456789",
     "email": "latienda@gmail.com",
     "description": "Esto es una tienda de ropa"

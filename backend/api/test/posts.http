@@ -1,0 +1,40 @@
+GET http://localhost:3000/posts HTTP/1.1
+
+###
+
+GET http://localhost:3000/posts/1 HTTP/1.1
+
+###
+
+GET http://localhost:3000/posts/webpage/1 HTTP/1.1
+
+###
+
+POST http://localhost:3000/posts HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg5NzAzLCJleHAiOjE2ODMyOTY5MDN9.nJwq6Bw59OzanEfU9cVpTm8pDzFI-QXkVqGCv-EPjLM
+Content-Type: application/json
+
+{
+    "webpageID": "1",
+    "content": "Este es el contenido de la publicación",
+    "attachment": "NONE"
+}
+
+###
+
+PUT http://localhost:3000/posts/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg5NzAzLCJleHAiOjE2ODMyOTY5MDN9.nJwq6Bw59OzanEfU9cVpTm8pDzFI-QXkVqGCv-EPjLM
+Content-Type: application/json
+
+{
+    "webpageID": "1",
+    "content": "Este es el nuevo contenido de la publicación",
+    "attachment": "NONE"
+}
+
+###
+
+DELETE http://localhost:3000/posts/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg5NzAzLCJleHAiOjE2ODMyOTY5MDN9.nJwq6Bw59OzanEfU9cVpTm8pDzFI-QXkVqGCv-EPjLM
+
+###

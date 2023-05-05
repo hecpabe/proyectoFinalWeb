@@ -151,6 +151,20 @@ const reviewsLogger = createLogger({
 
 });
 
+// Publicaciones
+const postsLogger = createLogger({
+
+    format: combine(
+        label({ label: "POSTS", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
+    transports: [
+        new transports.Console()
+    ]
+
+});
+
 /* Exportado de Módulo */
 module.exports = {
     appLogger,
@@ -161,5 +175,6 @@ module.exports = {
     usersLogger,
     merchantsLogger,
     webpagesLogger,
-    reviewsLogger
+    reviewsLogger,
+    postsLogger
 }
