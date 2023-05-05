@@ -1,7 +1,57 @@
-GET http://localhost:3000/webpages/search/rating/country/city/type/preferences/favs/startlimit HTTP/1.1
+GET http://localhost:3000/webpages HTTP/1.1
 
 ###
 
-GET http://localhost:3000/webpages/comercioX/startlimit HTTP/1.1
+GET http://localhost:3000/webpages/Tienda/ASC/España/Madrid/Ropa HTTP/1.1
+
+###
+
+GET http://localhost:3000/webpages/Tienda/ASC/NULL/NULL/NULL/true/false HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg3OTk3MSwiZXhwIjoxNjgyODg3MTcxfQ.pMPo5MvbuHqIwYU5Q89NHfmf8ErbmeXjRgHYUPIoXQE
+
+###
+
+GET http://localhost:3000/webpages/1 HTTP/1.1
+
+###
+
+POST http://localhost:3000/webpages HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgyODc4MDExLCJleHAiOjE2ODI4ODUyMTF9.eZ6WMEbRA4-yaWXOAAP1OuovlqjgSbRFJ1z_Tng7G0g
+Content-Type: application/json
+
+{
+    "name": "La tienda ... Sucursal 3",
+    "type": "Ropa",
+    "avatar": "NONE",
+    "country": "Reino Unido",
+    "city": "Londres",
+    "address": "C/ Wolf Street 8",
+    "phone": "123456789",
+    "email": "latienda@gmail.com",
+    "description": "Esto es una tienda de ropa"
+}
+
+###
+
+PUT http://localhost:3000/webpages/3 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgyODc4MDExLCJleHAiOjE2ODI4ODUyMTF9.eZ6WMEbRA4-yaWXOAAP1OuovlqjgSbRFJ1z_Tng7G0g
+Content-Type: application/json
+
+{
+    "name": "La tienda ... Sucursal 3",
+    "type": "Deportes",
+    "avatar": "NONE",
+    "country": "Reino Unido",
+    "city": "Londres",
+    "address": "C/ Wolf Street 8",
+    "phone": "123456789",
+    "email": "latienda@gmail.com",
+    "description": "Esto es una tienda de ropa"
+}
+
+###
+
+DELETE http://localhost:3000/webpages/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgyODUyMzU4LCJleHAiOjE2ODI4NTk1NTh9._q_q21T7rYbjdKSM26gbhSlwsVAsSfppr0WnuydkSBQ
 
 ###

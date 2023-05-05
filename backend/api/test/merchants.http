@@ -86,11 +86,11 @@ DELETE http://localhost:3000/merchants/1 HTTP/1.1
 
 ###
 
-PUT http://localhost:3000/merchants/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgyNjI2NzQwLCJleHAiOjE2ODI2MzM5NDB9.z496wEMNH1Gr_EVvkMOu1hVFfY1tMGS6gbzb1xxmHNY HTTP/1.1
+PUT http://localhost:3000/merchants/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI4NjU3MDAsImV4cCI6MTY4Mjg3MjkwMH0.XDArfGlFmB2_Ubr8BuYFmCY8eWZ32dbUfRCn9NDLUIU HTTP/1.1
 
 ###
 
 PUT http://localhost:3000/merchants/accept/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI2MjY3ODYsImV4cCI6MTY4MjYzMzk4Nn0._Fi5cK42HZnMJ5tHG81ipFFpWad4B_O0zjCu0s73zQA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI4NjU3MDAsImV4cCI6MTY4Mjg3MjkwMH0.XDArfGlFmB2_Ubr8BuYFmCY8eWZ32dbUfRCn9NDLUIU
 
 ###

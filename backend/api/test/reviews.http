@@ -1,33 +1,35 @@
-GET http://localhost:3000/reviews/webpage/merchantname HTTP/1.1
+GET http://localhost:3000/reviews/webpage/2 HTTP/1.1
 
 ###
 
-GET http://localhost:3000/reviews/user/username HTTP/1.1
+GET http://localhost:3000/reviews/user/2 HTTP/1.1
 
 ###
 
 POST http://localhost:3000/reviews HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg3ODExNSwiZXhwIjoxNjgyODg1MzE1fQ.QdzYnLhQLXgtUEX6D90eXMIefK7geXIoneShxRnnjbw
 Content-Type: application/json
 
 {
-    "username": "hecpabe",
-    "merchantname": "tienda",
-    "content": "Está bien",
-    "score": 5
+    "webpageID": "3",
+    "content": "No me gusta que todo esté en ingles",
+    "rating": 3.5
 }
 
 ###
 
-PUT http://localhost:3000/reviews/reviewid HTTP/1.1
+PUT http://localhost:3000/reviews/3 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg3ODExNSwiZXhwIjoxNjgyODg1MzE1fQ.QdzYnLhQLXgtUEX6D90eXMIefK7geXIoneShxRnnjbw
 Content-Type: application/json
 
 {
     "content": "Sigue estando bien",
-    "score": 5
+    "rating": 4.5
 }
 
 ###
 
-DELETE http://localhost:3000/reviews/reviewid HTTP/1.1
+DELETE http://localhost:3000/reviews/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg2NjAyMSwiZXhwIjoxNjgyODczMjIxfQ.dpAyo30WGmZvbHM9qL7HsKoDsHHWIQP00vVy7vjPjwU
 
 ###

@@ -24,12 +24,12 @@ GET http://localhost:3000/users/1 HTTP/1.1
 
 ###
 
-PUT http://localhost:3000/users/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sIjoidXNlciIsImlhdCI6MTY4MjQzNTk3OCwiZXhwIjoxNjgyNDQzMTc4fQ.n3uNrpEMKaAXU-yB8AaqAfiIYp4bkq_2J593GihFJ1M
+PUT http://localhost:3000/users/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg3OTk3MSwiZXhwIjoxNjgyODg3MTcxfQ.pMPo5MvbuHqIwYU5Q89NHfmf8ErbmeXjRgHYUPIoXQE
 Content-Type: application/json
 
 {
-    "username": "owner",
+    "username": "hecpabe",
     "name": "Héctor Paredes Benavides",
     "email": "hectorpbenavides@gmail.com",
     "password": "Abc123..",
@@ -37,7 +37,7 @@ Content-Type: application/json
     "avatar": "NONE",
     "country": "España",
     "city": "Madrid",
-    "preferences": ["hotel", "restaurant"],
+    "preferences": ["hotel", "restaurant", "Ropa"],
     "allowAdvertising": false
 }
 

@@ -1,4 +1,4 @@
-PUT http://localhost:3000/accounts/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2ZDY5YzIzMWZlOWEzZWFjYTU0N2YiLCJyb2wiOiJhZG1pbiIsImlhdCI6MTY4MjM2NDA2MCwiZXhwIjoxNjgyMzcxMjYwfQ.0LTqEf5v-Aww9nELb9WjPS9vmFAK3mN79RE6G_W8zKc HTTP/1.1
+PUT http://localhost:3000/accounts/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg2NTkwNCwiZXhwIjoxNjgyODczMTA0fQ.ehkAxTLjcFvlkX7wimJYBLoxb9O02jtCinDCF_ATOJE HTTP/1.1
 
 ###
 

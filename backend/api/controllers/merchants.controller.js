@@ -144,7 +144,7 @@ const createMerchant = async(req, res) => {
 
         });
 
-        handleHTTPResponse(res, "Comerciante creado con éxito", {});
+        handleHTTPResponse(res, "Comerciante creado con éxito, activa tu cuenta con el enlace que hemos mandado a tu correo y espera a que te acepten la cuenta", {});
 
     }
     catch(err){

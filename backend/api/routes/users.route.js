@@ -33,10 +33,10 @@ router.get("/", getUsers("all"));
 router.get("/:id", validatorGetByID, getUser("all"));
 
 // Modificación de un usuario
-router.put("/:id", validatorGetByID, validatorCreate, authMiddleware, checkRol(["user", "admin", "owner"]), checkSameOrGreaterAdminRol, updateUser);
+router.put("/:id", validatorGetByID, validatorCreate, authMiddleware, checkRol(["user", "admin", "owner"]), checkSameOrGreaterAdminRol("user"), updateUser);
 
 // Borrado de un usuario
-router.delete("/:id", validatorGetByID, authMiddleware, checkRol(["user", "admin", "owner"]), checkSameOrGreaterAdminRol, deleteUser);
+router.delete("/:id", validatorGetByID, authMiddleware, checkRol(["user", "admin", "owner"]), checkSameOrGreaterAdminRol("user"), deleteUser);
 
 /* Exportado de Módulo */
 module.exports = router;

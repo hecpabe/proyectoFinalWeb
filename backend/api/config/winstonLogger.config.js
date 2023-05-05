@@ -123,6 +123,34 @@ const merchantsLogger = createLogger({
 
 });
 
+// Comercios
+const webpagesLogger = createLogger({
+
+    format: combine(
+        label({ label: "WEBPAGES", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
+    transports: [
+        new transports.Console()
+    ]
+
+});
+
+// Reseñas
+const reviewsLogger = createLogger({
+
+    format: combine(
+        label({ label: "REVIEWS", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
+    transports: [
+        new transports.Console()
+    ]
+
+});
+
 /* Exportado de Módulo */
 module.exports = {
     appLogger,
@@ -131,5 +159,7 @@ module.exports = {
     mongoDBLogger,
     sequelizeLogger,
     usersLogger,
-    merchantsLogger
+    merchantsLogger,
+    webpagesLogger,
+    reviewsLogger
 }
