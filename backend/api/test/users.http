@@ -24,6 +24,11 @@ GET http://localhost:3000/users/1 HTTP/1.1
 
 ###
 
+GET http://localhost:3000/users/preferences/Ropa HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg1NDQyLCJleHAiOjE2ODMyOTI2NDJ9.Q6p7rdMZFRC0EnUbee-WjX4bSCr5jHy5qG5zRH3bu1w
+
+###
+
 PUT http://localhost:3000/users/2 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg3OTk3MSwiZXhwIjoxNjgyODg3MTcxfQ.pMPo5MvbuHqIwYU5Q89NHfmf8ErbmeXjRgHYUPIoXQE
 Content-Type: application/json

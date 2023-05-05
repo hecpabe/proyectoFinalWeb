@@ -130,6 +130,17 @@ const validatorActivateAccount = [
 
 ];
 
+// Obtención de usuarios por preferencia
+const validatorGetUsersByPreference = [
+
+    check("type").exists().notEmpty(),
+
+    (req, res, next) => {
+        return validateResults(req, res, next);
+    }
+
+]
+
 /* Exportado de Módulo */
 module.exports = {
     validatorGetByID,
@@ -138,5 +149,6 @@ module.exports = {
     validatorRestorePasswordEmail,
     validatorRestorePasswordCode,
     validatorRestorePasswordPassword,
-    validatorActivateAccount
+    validatorActivateAccount,
+    validatorGetUsersByPreference
 }

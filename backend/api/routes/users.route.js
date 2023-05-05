@@ -14,8 +14,8 @@
 const express = require("express");
 
 // Bibliotecas propias
-const { createUser, getUsers, getUser, updateUser, deleteUser } = require("../controllers/users.controller");
-const { validatorCreate, validatorGetByID } = require("../validators/users.validators");
+const { createUser, getUsers, getUser, getUsersByPreference, updateUser, deleteUser } = require("../controllers/users.controller");
+const { validatorCreate, validatorGetByID, validatorGetUsersByPreference } = require("../validators/users.validators");
 const { authMiddleware, checkSameOrGreaterAdminRol } = require("../middleware/session.middleware");
 const { checkRol } = require("../middleware/rol.middleware");
 
@@ -31,6 +31,9 @@ router.get("/", getUsers("all"));
 
 // Obtención de los datos de un usuario
 router.get("/:id", validatorGetByID, getUser("all"));
+
+// Obtención de usuarios con una preferencia
+router.get("/preferences/:type", validatorGetUsersByPreference, authMiddleware, checkRol(["merchant"]), getUsersByPreference);
 
 // Modificación de un usuario
 router.put("/:id", validatorGetByID, validatorCreate, authMiddleware, checkRol(["user", "admin", "owner"]), checkSameOrGreaterAdminRol("user"), updateUser);

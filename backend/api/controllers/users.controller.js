@@ -22,6 +22,7 @@ const { nodemailerLogger, usersLogger } = require("../config/winstonLogger.confi
 const { generateRandomCode } = require("../utils/handleRandom.util");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");
 const { nodemailerTransporter } = require("../config/nodemailer.config");
+const { stringifyArray, stringToArray } = require("../utils/handleArray.util");
 
 /* Declaraciones Constantes */
 const RESTORE_PASSWORD_CODE_LENGTH = 6;
@@ -43,9 +44,7 @@ const getUsers = (rol) => async (req, res) => {
         // Quitamos las contraseñas y transformamos las preferencias a array antes de mandar los usuarios
         data.forEach(element => {
             element.set("password", undefined, { strict: false });
-            element.set("preferences", element.preferences.split(',').filter((element) => {
-                return element.length > 0;
-            }), { strict: false });
+            element.set("preferences", stringToArray(element.preferences), { strict: false });
         });
 
         handleHTTPResponse(res, "Usuarios obtenidos con éxito", data);
@@ -83,9 +82,7 @@ const getUser = (rol) => async (req, res) => {
 
             data.forEach(element => {
                 element.set("password", undefined, { strict: false });
-                element.set("preferences", element.preferences.split(',').filter((element) => {
-                    return element.length > 0;
-                }), { strict: false });
+                element.set("preferences", stringToArray(element.preferences), { strict: false });
             })
 
         }
@@ -98,9 +95,7 @@ const getUser = (rol) => async (req, res) => {
             }
 
             data.set("password", undefined, { strict: false });
-            data.set("preferences", data.preferences.split(',').filter((element) => {
-                return element.length > 0;
-            }), { strict: false });
+            data.set("preferences", stringToArray(data.preferences), { strict: false });
 
         }
 
@@ -111,6 +106,46 @@ const getUser = (rol) => async (req, res) => {
 
         usersLogger.error("ERROR [users.controller / getUser]: " + err);
         handleHTTPError(res, "No se ha podido obtener el usuario", INTERNAL_SERVER_ERROR);
+
+    }
+
+}
+
+// Obtención de un usuario por sus preferencias
+const getUsersByPreference = async (req, res) => {
+
+    try{
+
+        // Obtenemos el tipo de comercio a buscar
+        const { type } = matchedData(req);
+
+        // Buscamos a los usuarios con esa preferencia y que además tengan habilitado el poder recibir ofertas
+        const data = await usersModel.selectAllWhere({
+            [Op.and]: [
+                { preferences: { [Op.like]: `%${type}%` } },
+                { allowAdvertising: true }
+            ]
+        });
+
+        // Quitamos las contraseñas y transformamos las preferencias a array antes de mandar los usuarios
+        data.forEach(element => {
+            element.set("password", undefined, { strict: false });
+            element.set("preferences", stringToArray(element.preferences), { strict: false });
+        });
+
+        if(!data || data.length <= 0){
+            handleHTTPError(res, "No se ha encontrado ningún usuario", NOT_FOUND);
+            return;
+        }
+
+        handleHTTPResponse(res, "Usuarios obtenidos con éxito", data);
+
+    }
+    catch(err){
+
+        // Mostramos el error
+        usersLogger.error("ERROR [users.controller / getUsersByPreference]: " + err);
+        handleHTTPError(res, "No se han podido obtener los usuarios", INTERNAL_SERVER_ERROR);
 
     }
 
@@ -146,14 +181,12 @@ const createUser = (rol) => async (req, res) => {
 
         // Generamos la contraseña hasheada, la cambiamos en el body y creamos al nuevo usuario
         const hashedPassword = await hashPassword(req.password);
-        const body = { ...req, password: hashedPassword, rol: rol, accountEnabled: false, preferences: req.preferences.toString() };
+        const body = { ...req, password: hashedPassword, rol: rol, accountEnabled: false, preferences: stringifyArray(req.preferences) };
         const dataUser = await usersModel.insert(body);
 
         // Eliminamos el atributo password de la contraseña para no mandarla, y transformamos las preferencias a array
         dataUser.set("password", undefined, { strict: false });
-        dataUser.set("preferences", dataUser.preferences.split(',').filter((element) => {
-            return element.length > 0;
-        }), { strict: false });
+        dataUser.set("preferences", stringToArray(dataUser.preferences), { strict: false });
 
         // Mandamos el token de sesión junto a la información del usuario
         const mailOptions = {
@@ -223,9 +256,7 @@ const loginUser = async (req, res) => {
         // Devolvemos el usuario
         user.set("password", undefined, { strict: false });
         if(user.preferences != undefined)
-            user.set("preferences", user.preferences.split(',').filter((element) => {
-            return element.length > 0;
-        }), { strict: false });
+            user.set("preferences", stringToArray(user.preferences), { strict: false });
         const data = {
             token: tokenSign(user),
             user
@@ -476,7 +507,7 @@ const updateUser = async (req, res) => {
         body.password = await hashPassword(body.password);
 
         // Transformamos el array de preferencias
-        body.preferences = body.preferences.toString();
+        body.preferences = stringifyArray(body.preferences);
 
         // Realizamos el update
         const data = await usersModel.updateByID(id, body);
@@ -596,6 +627,7 @@ const activateUser = async (req, res) => {
 module.exports = {
     getUsers,
     getUser,
+    getUsersByPreference,
     createUser,
     loginUser,
     restorePasswordEmail,
