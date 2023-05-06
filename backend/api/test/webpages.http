@@ -22,7 +22,7 @@ Content-Type: application/json
 {
     "name": "La tienda ... Sucursal",
     "type": "Ropa",
-    "avatar": "NONE",
+    "avatar": 1,
     "country": "España",
     "city": "Madrid",
     "address": "C/ Gran Vía 8",
@@ -40,7 +40,7 @@ Content-Type: application/json
 {
     "name": "La tienda ... Sucursal 3",
     "type": "Deportes",
-    "avatar": "NONE",
+    "avatar": 1,
     "country": "Reino Unido",
     "city": "Londres",
     "address": "C/ Wolf Street 8",

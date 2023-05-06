@@ -14,7 +14,7 @@ const { matchedData } = require("express-validator");
 const { Op } = require("sequelize");
 
 // Bibliotecas propias
-const { reviewsModel, webpagesModel } = require("../models");
+const { reviewsModel, webpagesModel, usersModel } = require("../models");
 const { handleHTTPResponse, handleHTTPError, NOT_FOUND, INTERNAL_SERVER_ERROR, UNAUTHORIZED } = require("../utils/handleResponse.util");
 const { reviewsLogger } = require("../config/winstonLogger.config");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");

@@ -15,6 +15,8 @@ const { DataTypes } = require("sequelize");
 // Bibliotecas propias
 const { sequelize } = require("../../config/mysql.config");
 const { normalizeJSONForSequelize } = require("../../utils/handleJSON.util");
+const Webpages = require("./webpages.model");
+const Storages = require("./storage.model");
 
 /* Modelo de Comerciantes */
 const Merchants = sequelize.define(
@@ -90,7 +92,14 @@ Merchants.selectAllWhere = function(conditions){
 
 // Obtener un usuario
 Merchants.selectOne = function(id){
-    return Merchants.findOne({ where: { id: id } });
+    return Merchants.findOne({ where: { id: id }, include: [{
+        model: Webpages,
+        as: "merchantWebpages",
+        include: [{
+            model: Storages,
+            as: "image"
+        }]
+    }] });
 }
 
 // Crear un usuario

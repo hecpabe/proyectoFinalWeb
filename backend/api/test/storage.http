@@ -1,0 +1,12 @@
+POST http://localhost:3000/storage/images HTTP/1.1
+Content-Type: multipart/form-data; boundary=Boundry
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODMzMzUzNDEsImV4cCI6MTY4MzM0MjU0MX0.d-KvYDpGGNK3ZTKaqjfgt-wrm2LGv6l2kE6Uhr8ZmXI
+
+--Boundry
+Content-Disposition: form-data; name="image"; filename="img.jpg"
+Content-Type: image/jpg
+
+< ./img.jpg
+--Boundry--
+
+###

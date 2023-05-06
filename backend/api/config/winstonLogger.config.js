@@ -165,6 +165,20 @@ const postsLogger = createLogger({
 
 });
 
+// Almacenamiento
+const storageLogger = createLogger({
+
+    format: combine(
+        label({ label: "STORAGE", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
+    transports: [
+        new transports.Console()
+    ]
+
+});
+
 /* Exportado de Módulo */
 module.exports = {
     appLogger,
@@ -176,5 +190,6 @@ module.exports = {
     merchantsLogger,
     webpagesLogger,
     reviewsLogger,
-    postsLogger
+    postsLogger,
+    storageLogger
 }

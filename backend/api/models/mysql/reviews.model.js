@@ -15,6 +15,8 @@ const { DataTypes } = require("sequelize");
 // Bibliotecas propias
 const { sequelize } = require("../../config/mysql.config");
 const { normalizeJSONForSequelize } = require("../../utils/handleJSON.util");
+const Users = require("./users.model");
+const Storages = require("./storage.model");
 
 /* Módulo de Reseñas */
 const Reviews = sequelize.define(
@@ -53,7 +55,14 @@ Reviews.selectAll = function(){
 
 // Obtener todos los usuarios con restricción
 Reviews.selectAllWhere = function(conditions){
-    return Reviews.findAll({ where: conditions });
+    return Reviews.findAll({ where: conditions, include: [{
+        model: Users,
+        as: "user",
+        include: [{
+            model: Storages,
+            as: "image"
+        }]
+    }] });
 }
 
 // Obtener un usuario

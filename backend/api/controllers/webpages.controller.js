@@ -14,27 +14,14 @@ const { matchedData } = require("express-validator");
 const { Op } = require("sequelize");
 
 // Bibliotecas propias
-const { webpagesModel, reviewsModel } = require("../models");
+const { webpagesModel, reviewsModel, postsModel, storageModel } = require("../models");
 const { handleHTTPResponse, handleHTTPError, INTERNAL_SERVER_ERROR, NOT_FOUND, UNAUTHORIZED } = require("../utils/handleResponse.util");
 const { webpagesLogger } = require("../config/winstonLogger.config");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");
 const { sequelize } = require("../config/mysql.config");
 
 /* Declaraciones Constantes */
-const DB_ENGINE = process.env.DB_ENGINE;
 const PROPERTIES = getProperties();
-
-/* Relaciones */
-if(DB_ENGINE === "mysql"){
-    webpagesModel.hasMany(reviewsModel, {
-        foreignKey: "webpageID"/* ,
-        as: "reviews" */
-    });
-    reviewsModel.belongsTo(webpagesModel, {
-        foreignKey: "webpageID"/* ,
-        as: "webpage" */
-    });
-}
 
 /* Codificación de Funciones */
 // Obtención de todas las páginas
@@ -53,7 +40,9 @@ const getWebpages = async (req, res) => {
             include: [{
                 model: reviewsModel,
                 attributes: []
-            }],
+            },
+            "image"
+            ],
             group: ["webpages.id"]
         });
 
@@ -87,6 +76,15 @@ const getWebpage = async (req, res) => {
             include: [{
                 model: reviewsModel,
                 attributes: []
+            },
+            "image",
+            {
+                model: postsModel,
+                as: "posts",
+                include: [{
+                    model: storageModel,
+                    as: "image"
+                }]
             }],
             where: { id: id },
             group: ["webpages.id"]
@@ -130,7 +128,9 @@ const getFilteredWebpages = async (req, res) => {
             include: [{
                 model: reviewsModel,
                 attributes: []
-            }],
+            },
+            "image"
+            ],
             group: ["webpages.id"]
         };
         var andCondition = [];
@@ -205,7 +205,9 @@ const getFilteredWebpagesAsLoggedUser = async (req, res) => {
             include: [{
                 model: reviewsModel,
                 attributes: []
-            }],
+            },
+            "image"
+            ],
             group: ["webpages.id"]
         };
         var andCondition = [];

@@ -11,30 +11,30 @@ GET http://localhost:3000/posts/webpage/1 HTTP/1.1
 ###
 
 POST http://localhost:3000/posts HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg5NzAzLCJleHAiOjE2ODMyOTY5MDN9.nJwq6Bw59OzanEfU9cVpTm8pDzFI-QXkVqGCv-EPjLM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMzI2NjEyLCJleHAiOjE2ODMzMzM4MTJ9.FGlO8YOfMiunlD2elRyVewzQ3pXPl-0ogA9cVcgAiLA
 Content-Type: application/json
 
 {
     "webpageID": "1",
     "content": "Este es el contenido de la publicación",
-    "attachment": "NONE"
+    "attachment": "-1"
 }
 
 ###
 
 PUT http://localhost:3000/posts/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg5NzAzLCJleHAiOjE2ODMyOTY5MDN9.nJwq6Bw59OzanEfU9cVpTm8pDzFI-QXkVqGCv-EPjLM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMzI2NjEyLCJleHAiOjE2ODMzMzM4MTJ9.FGlO8YOfMiunlD2elRyVewzQ3pXPl-0ogA9cVcgAiLA
 Content-Type: application/json
 
 {
     "webpageID": "1",
     "content": "Este es el nuevo contenido de la publicación",
-    "attachment": "NONE"
+    "attachment": "1"
 }
 
 ###
 
-DELETE http://localhost:3000/posts/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMjg5NzAzLCJleHAiOjE2ODMyOTY5MDN9.nJwq6Bw59OzanEfU9cVpTm8pDzFI-QXkVqGCv-EPjLM
+DELETE http://localhost:3000/posts/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzMzE4MDA1LCJleHAiOjE2ODMzMjUyMDV9.Cpq5Z8Tjdc7HodG8ajSKvIxibVa336Bg5RRKeL6Qr-c
 
 ###

@@ -13,7 +13,7 @@
 const { matchedData } = require("express-validator");
 
 // Bibliotecas propias
-const { postsModel, webpagesModel } = require("../models");
+const { postsModel, webpagesModel, storageModel } = require("../models");
 const { handleHTTPError, handleHTTPResponse, NOT_FOUND, INTERNAL_SERVER_ERROR, UNAUTHORIZED } = require("../utils/handleResponse.util");
 const { postsLogger } = require("../config/winstonLogger.config");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");
@@ -22,17 +22,6 @@ const { getProperties } = require("../utils/handlePropertiesEngine.util");
 const DB_ENGINE = process.env.DB_ENGINE;
 const PROPERTIES = getProperties();
 
-/* Relaciones */
-if(DB_ENGINE === "mysql"){
-    webpagesModel.hasMany(postsModel, {
-        foreignKey: "webpageID"
-    });
-    postsModel.belongsTo(webpagesModel, {
-        foreignKey: "webpageID",
-        as: "webpage"
-    });
-}
-
 /* Codificación de Funciones */
 // Obtención de todos los posts
 const getPosts = async (req, res) => {
@@ -40,7 +29,16 @@ const getPosts = async (req, res) => {
     try{
 
         // Obtenemos los datos de la base de datos y los mandamos
-        const data = await postsModel.findAll({ include: "webpage" });
+        const data = await postsModel.findAll({ include: [{
+            model: webpagesModel,
+            as: "webpage",
+            include: [{
+                model: storageModel,
+                as: "image"
+            }]
+        }, 
+        "image"
+        ] });
 
         if(!data || data.length <= 0){
             handleHTTPError(res, "No se encontraron publicaciones", NOT_FOUND);
@@ -66,7 +64,16 @@ const getPost = async (req, res) => {
 
         // Obtenemos la publicación con la ID indicada y la devolvemos
         const { id } = matchedData(req);
-        const data = await postsModel.findOne({ where: { id: id }, include: "webpage" });
+        const data = await postsModel.findOne({ where: { id: id }, include: [{
+            model: webpagesModel,
+            as: "webpage",
+            include: [{
+                model: storageModel,
+                as: "image"
+            }]
+        }, 
+        "image"
+        ]});
 
         if(!data || data.length <= 0){
             handleHTTPError(res, "No se ha encontrado la publicación", NOT_FOUND);
@@ -92,7 +99,16 @@ const getWebpagePosts = async (req, res) => {
 
         // Obtenemos el ID de la página de la que obtener los posts
         const { id } = matchedData(req);
-        const data = await postsModel.findAll({ where: { webpageID: id }, include: "webpage" });
+        const data = await postsModel.findAll({ where: { webpageID: id }, include: [{
+            model: webpagesModel,
+            as: "webpage",
+            include: [{
+                model: storageModel,
+                as: "image"
+            }]
+        }, 
+        "image"
+        ]});
 
         if(!data || data.length <= 0){
             handleHTTPError(res, "No se han encontrado publicaciones", NOT_FOUND);
@@ -133,6 +149,22 @@ const createPost = async (req, res) => {
             return;
         }
 
+        // Comprobamos si hay que insertar attachment
+        body.attachment = parseInt(body.attachment);
+        if(body.attachment >= 0){
+
+            // Comprobamos que el archivo existe
+            const attachment = await storageModel.selectOne(body.attachment);
+
+            if(!attachment || attachment.length <= 0){
+                handleHTTPError(res, "No se ha encontrado el fichero adjunto a la publicación", NOT_FOUND);
+                return;
+            }
+
+        }
+        else
+            body.attachment = undefined;
+
         // Introducimos la nueva publicación
         const data = await postsModel.insert(body);
 
@@ -171,6 +203,22 @@ const updatePost = async (req, res) => {
             handleHTTPError(res, "No tienes autorización para modificar esta publicación", UNAUTHORIZED);
             return;
         }
+
+        // Comprobamos si hay que incluir un attachment
+        body.attachment = parseInt(body.attachment);
+        if(body.attachment >= 0){
+
+            // Comprobamos que el attachment existe
+            const attachment = await storageModel.selectOne(body.attachment);
+
+            if(!attachment || attachment.length <= 0){
+                handleHTTPError(res, "No se ha encontrado el fichero adjunto a la publicación", NOT_FOUND);
+                return;
+            }
+
+        }
+        else
+            body.attachment = undefined;
 
         // Mantenemos el ID de la página a la que pertenece el post
         body.webpageID = post.webpageID;

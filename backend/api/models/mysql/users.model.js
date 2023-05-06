@@ -48,7 +48,7 @@ const Users = sequelize.define(
             allowNull: false
         },
         avatar: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         country: {
@@ -77,17 +77,17 @@ const Users = sequelize.define(
 // Creación de adaptadores para realizar las mismas funciones tanto en MySQL como en MongoDB
 // Obtener todos los usuarios
 Users.selectAll = function(){
-    return Users.findAll();
+    return Users.findAll({ include: "image" });
 }
 
 // Obtener todos los usuarios con restricción
 Users.selectAllWhere = function(conditions){
-    return Users.findAll({ where: conditions });
+    return Users.findAll({ where: conditions, include: "image" });
 }
 
 // Obtener un usuario
 Users.selectOne = function(id){
-    return Users.findOne({ where: { id: id } });
+    return Users.findOne({ where: { id: id }, include: ["image", "reviewsUser"] });
 }
 
 // Crear un usuario

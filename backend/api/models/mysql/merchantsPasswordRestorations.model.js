@@ -35,12 +35,6 @@ const MerchantsPasswordRestorations = sequelize.define(
     }
 );
 
-/* Relaciones */
-MerchantsPasswordRestorations.belongsTo(Merchants, {
-    foreignKey: "merchantID",
-    as: "merchant"
-});
-
 /* Codificación de Funciones */
 // Creación de adaptadores para realizar las mismas funciones tanto en MySQL como en MongoDB
 // Obtener todos los admines

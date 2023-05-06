@@ -1,9 +1,9 @@
 
 
 /*
-    Título: Posts Model
+    Título: Storage Model
     Nombre: Héctor Paredes Benavides
-    Descripción: Creamos un módulo para la gestión del modelo de publicaciones para MySQL
+    Descripción: Creamos un módulo para gestionar el modelo del almacenamiento para MySQL
     Fecha: 5/5/2023
     Última Modificación: 5/5/2023
 */
@@ -16,21 +16,18 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../config/mysql.config");
 const { normalizeJSONForSequelize } = require("../../utils/handleJSON.util");
 
-/* Modelo de Publicaciones */
-const Posts = sequelize.define(
+/* Modelo de Almacenamiento */
+const Storage = sequelize.define(
 
-    "posts",
+    "storage",
     {
-        webpageID: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        content: {
+        filename: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        attachment: {
-            type: DataTypes.INTEGER
+        url: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {
@@ -42,38 +39,38 @@ const Posts = sequelize.define(
 /* Codificación de Funciones */
 // Creación de adaptadores para realizar las mismas funciones tanto en MySQL como en MongoDB
 // Obtener todos los usuarios
-Posts.selectAll = function(){
-    return Posts.findAll();
+Storage.selectAll = function(){
+    return Storage.findAll();
 }
 
 // Obtener todos los usuarios con restricción
-Posts.selectAllWhere = function(conditions){
-    return Posts.findAll({ where: conditions });
+Storage.selectAllWhere = function(conditions){
+    return Storage.findAll({ where: conditions });
 }
 
 // Obtener un usuario
-Posts.selectOne = function(id){
-    return Posts.findOne({ where: { id: id } });
+Storage.selectOne = function(id){
+    return Storage.findOne({ where: { id: id } });
 }
 
 // Crear un usuario
-Posts.insert = function(body){
-    return Posts.create(normalizeJSONForSequelize(body));
+Storage.insert = function(body){
+    return Storage.create(normalizeJSONForSequelize(body));
 }
 
 // Modificar un usuario
-Posts.updateByID = function(id, body){
-    return Posts.update(
+Storage.updateByID = function(id, body){
+    return Storage.update(
         normalizeJSONForSequelize(body),
         { where: { id: id } }
     );
 }
 
 // Eliminar un usuario
-Posts.deleteByID = async function(id){
+Storage.deleteByID = async function(id){
     
     // Realizamos la operación
-    var result = await Posts.destroy({ where: { id: id } });
+    var result = await Storage.destroy({ where: { id: id } });
 
     // Mandamos la respuesta en función del resultado
     if(result === 1)
@@ -84,4 +81,4 @@ Posts.deleteByID = async function(id){
 }
 
 /* Exportado de Módulo */
-module.exports = Posts;
+module.exports = Storage;

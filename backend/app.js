@@ -18,9 +18,10 @@ require("dotenv").config();
 const connectToMongoDB = require("./api/config/mongodb.config");
 const { sequelize, connectToMySQL } = require("./api/config/mysql.config");
 const { appLogger } = require("./api/config/winstonLogger.config");
-const { usersModel } = require("./api/models");
+const { usersModel, storageModel } = require("./api/models");
 const { generateRandomPassword } = require("./api/utils/handleRandom.util");
 const { hashPassword } = require("./api/utils/handlePassword.util");
+const { setModelRelations } = require("./api/utils/handleRelations.util");
 
 /* Declaraciones Globales */
 const PORT = process.env.PORT || 3000;
@@ -50,6 +51,7 @@ app.listen(PORT, async () => {
     else{
         await connectToMySQL();
         //await syncSequelize();
+        setModelRelations();
     }
 
     appLogger.info("Servidor escuchando en el puerto " + PORT + "...");
@@ -79,13 +81,25 @@ const createOwnerUser = async () => {
         password: await hashPassword(ownerPassword),
         description: "Owner of the app",
         rol: "owner",
-        avatar: "NONE",
+        avatar: 1,
         accountEnabled: true
     }
 
     appLogger.info("Generando nuevo usuario OWNER...");
     await usersModel.insert(body);
     appLogger.info(`Usuario OWNER generado (Username: ${body.username} | Password: ${ownerPassword})`);
+
+}
+
+// Creación de la imagen de usuario por defecto
+const createDefaultUserImage = async () => {
+
+    const fileData = {
+        filename: "defaultuser.png",
+        url: process.env.PUBLIC_URL+"/defaultuser.png"
+    }
+
+    await storageModel.create(fileData);
 
 }
 
@@ -98,6 +112,9 @@ const syncSequelize = async () => {
         appLogger.info("Sincronizando base de datos con los modelos...");
         await sequelize.sync();
         appLogger.info("Base de datos sincronizada con éxito.");
+
+        // Creación de la imagen de usuario por defecto
+        await createDefaultUserImage();
 
         // Creación de un usuario OWNER
         await createOwnerUser();

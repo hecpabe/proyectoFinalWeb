@@ -38,13 +38,14 @@ const getUsers = (rol) => async (req, res) => {
 
         // Obtenemos los datos de la base de datos y los mandamos
         const data = rol === "all" ? 
-            await usersModel.selectAll() :
-            await usersModel.selectAllWhere({ rol: rol });
+            await usersModel.findAll({ include: "image" }) :
+            await usersModel.findAll({ where: { rol: rol }, include: "image" });
 
         // Quitamos las contraseñas y transformamos las preferencias a array antes de mandar los usuarios
         data.forEach(element => {
             element.set("password", undefined, { strict: false });
-            element.set("preferences", stringToArray(element.preferences), { strict: false });
+            if(element.preferences)
+                element.set("preferences", stringToArray(element.preferences), { strict: false });
         });
 
         handleHTTPResponse(res, "Usuarios obtenidos con éxito", data);

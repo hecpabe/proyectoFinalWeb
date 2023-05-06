@@ -35,12 +35,6 @@ const PasswordRestorations = sequelize.define(
     }
 );
 
-/* Relaciones */
-PasswordRestorations.belongsTo(Users, {
-    foreignKey: "userID",
-    as: "user"
-});
-
 /* Codificación de Funciones */
 // Creación de adaptadores para realizar las mismas funciones tanto en MySQL como en MongoDB
 // Obtener todos los admines

@@ -1,10 +1,10 @@
 GET http://localhost:3000/admins HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI0MzU0NDYsImV4cCI6MTY4MjQ0MjY0Nn0.BUw-TLDw65VUAQBLZzqgmfEvMU1ubpijavTpLUwZ484
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODMzMzMxNTYsImV4cCI6MTY4MzM0MDM1Nn0.RhmV8nDjTYv7nM9DOusSdN71vLl_99GWI7oLgiibuBo
 
 ###
 
 GET http://localhost:3000/admins/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI0MzU0NDYsImV4cCI6MTY4MjQ0MjY0Nn0.BUw-TLDw65VUAQBLZzqgmfEvMU1ubpijavTpLUwZ484
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODMzMzMxNTYsImV4cCI6MTY4MzM0MDM1Nn0.RhmV8nDjTYv7nM9DOusSdN71vLl_99GWI7oLgiibuBo
 
 ###
 
@@ -18,7 +18,7 @@ Content-Type: application/json
     "email": "hector.paredes@live.u-tad.com",
     "password": "Abc123..",
     "description": "Esta es mi nueva descripción",
-    "avatar": "NONE",
+    "avatar": 1,
     "country": "España",
     "city": "Madrid",
     "preferences": ["hotel", "restaurant"],
@@ -28,7 +28,7 @@ Content-Type: application/json
 ###
 
 PUT http://localhost:3000/admins/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODI4NjU2NjgsImV4cCI6MTY4Mjg3Mjg2OH0.eDzrXukn73qdCPsBQlZmNNciMGpti1wm08Qxr6i3cmQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODMzMjk2MTUsImV4cCI6MTY4MzMzNjgxNX0.q8_QSuCNtd-AsHPCTq8ff8BBMOw3WQBdxM85rX3w0y4
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
     "email": "hector.paredes@live.u-tad.com",
     "password": "Abc123..",
     "description": "Esta es mi nueva descripción",
-    "avatar": "NONE",
+    "avatar": 1,
     "country": "España",
     "city": "Madrid",
     "preferences": ["hotel", "restaurant"],
