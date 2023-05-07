@@ -6,8 +6,8 @@ GET http://localhost:3000/webpages/Tienda/ASC/España/Madrid/Ropa HTTP/1.1
 
 ###
 
-GET http://localhost:3000/webpages/Tienda/ASC/NULL/NULL/NULL/true/false HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sIjoidXNlciIsImlhdCI6MTY4Mjg3OTk3MSwiZXhwIjoxNjgyODg3MTcxfQ.pMPo5MvbuHqIwYU5Q89NHfmf8ErbmeXjRgHYUPIoXQE
+GET http://localhost:3000/webpages/Tienda/ASC/NULL/NULL/NULL/false/true HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODM0Njk5OTAsImV4cCI6MTY4MzQ3NzE5MH0.4uftCSVpsBQTtU7phgQTArLvqNJNJRwPFXF69GlnhUE
 
 ###
 

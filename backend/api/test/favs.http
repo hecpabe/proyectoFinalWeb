@@ -1,21 +1,35 @@
-GET http://localhost:3000/favs/user/username HTTP/1.1
+GET http://localhost:3000/favs HTTP/1.1
 
 ###
 
-GET http://localhost:3000/favs/webpage/merchantname HTTP/1.1
+GET http://localhost:3000/favs/user/1 HTTP/1.1
+
+###
+
+GET http://localhost:3000/favs/webpage/1 HTTP/1.1
+
+###
+
+GET http://localhost:3000/favs/1 HTTP/1.1
+
+###
+
+GET http://localhost:3000/favs/check/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODM0Njg2NTMsImV4cCI6MTY4MzQ3NTg1M30._AXMAHZ6vCWUpm8AItjWnCTUVgGL_3SmN8E6iw3OzUo
 
 ###
 
 POST http://localhost:3000/favs HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODM0Njg2NTMsImV4cCI6MTY4MzQ3NTg1M30._AXMAHZ6vCWUpm8AItjWnCTUVgGL_3SmN8E6iw3OzUo
 Content-Type: application/json
 
 {
-    "username": "hecpabe",
-    "merchantname": "tienda"
+    "id": 1
 }
 
 ###
 
-DELETE http://localhost:3000/favs/username/merchantname HTTP/1.1
+DELETE http://localhost:3000/favs/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sIjoib3duZXIiLCJpYXQiOjE2ODM0Njg2NTMsImV4cCI6MTY4MzQ3NTg1M30._AXMAHZ6vCWUpm8AItjWnCTUVgGL_3SmN8E6iw3OzUo
 
 ###

@@ -19,7 +19,8 @@ const models = {
     webpagesModel: require(path + "/webpages.model"),
     reviewsModel: require(path + "/reviews.model"),
     postsModel: require(path + "/posts.model"),
-    storageModel: require(path + "/storage.model")
+    storageModel: require(path + "/storage.model"),
+    favsModel: require(path + "/favs.model")
 }
 
 /* Exportado de Módulos */

@@ -18,7 +18,8 @@ const {
     reviewsModel,
     storageModel,
     usersModel,
-    webpagesModel
+    webpagesModel,
+    favsModel
 } = require("../models");
 
 /* Codificación de Funciones */
@@ -122,6 +123,20 @@ const setModelRelations = () => {
         as: "user"
     });
 
+    // Users (1) -> Favs (n)
+    usersModel.hasMany(favsModel, {
+        foreignKey: "userID",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        as: "favsUser"
+    });
+    favsModel.belongsTo(usersModel, {
+        foreignKey: "userID",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        as: "user"
+    });
+
     // Webpages (1) -> Posts (n)
     webpagesModel.hasMany(postsModel, {
         foreignKey: "webpageID",
@@ -146,6 +161,20 @@ const setModelRelations = () => {
         foreignKey: "webpageID",
         onUpdate: "CASCADE",
         onDelete: "CASCADE"
+    });
+
+    // Webpages (1) -> Favs (n)
+    webpagesModel.hasMany(favsModel, {
+        foreignKey: "webpageID",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        as: "favsWebpage"
+    });
+    favsModel.belongsTo(webpagesModel, {
+        foreignKey: "webpageID",
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        as: "webpage"
     });
 
 }

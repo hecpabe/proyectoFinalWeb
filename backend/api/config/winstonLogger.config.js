@@ -179,6 +179,20 @@ const storageLogger = createLogger({
 
 });
 
+// Favoritos
+const favsLogger = createLogger({
+
+    format: combine(
+        label({ label: "FAVS", message: true }),
+        timestamp(),
+        generalFormat()
+    ),
+    transports: [
+        new transports.Console()
+    ]
+
+});
+
 /* Exportado de Módulo */
 module.exports = {
     appLogger,
@@ -191,5 +205,6 @@ module.exports = {
     webpagesLogger,
     reviewsLogger,
     postsLogger,
-    storageLogger
+    storageLogger,
+    favsLogger
 }

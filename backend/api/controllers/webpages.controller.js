@@ -14,7 +14,7 @@ const { matchedData } = require("express-validator");
 const { Op } = require("sequelize");
 
 // Bibliotecas propias
-const { webpagesModel, reviewsModel, postsModel, storageModel } = require("../models");
+const { webpagesModel, reviewsModel, postsModel, storageModel, favsModel } = require("../models");
 const { handleHTTPResponse, handleHTTPError, INTERNAL_SERVER_ERROR, NOT_FOUND, UNAUTHORIZED } = require("../utils/handleResponse.util");
 const { webpagesLogger } = require("../config/winstonLogger.config");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");
@@ -241,18 +241,27 @@ const getFilteredWebpagesAsLoggedUser = async (req, res) => {
         const data = await webpagesModel.findAll(query);
 
         // Comprobamos que se encuentre en las preferencias y favoritos del usuario
-        // TODO: HACER EL FAV
+        const userFavs = await favsModel.selectAllWhere({ userID: user[PROPERTIES.id] });
+        const userFavsIDs = [];
+
+        if(userFavs && userFavs.length > 0){
+            userFavs.forEach(element => {
+                userFavsIDs.push(element.webpageID);
+            });
+        }
+
         const userPreferences = user.preferences.split(',').filter((element) => {
             return element.length > 0;
         });
         const filteredData = data.filter((webpage) => (!preferencesAsBool || userPreferences.includes(webpage.dataValues.type)))
+        const filteredDataInFavs = filteredData.filter((webpage) => (!favAsBool || userFavsIDs.includes(webpage.dataValues[PROPERTIES.id])));
 
-        if(!filteredData || filteredData.length <= 0){
+        if(!filteredDataInFavs || filteredDataInFavs.length <= 0){
             handleHTTPError(res, "No se han encontrado resultados", NOT_FOUND);
             return;
         }
 
-        handleHTTPResponse(res, "Se han encontrado los siguientes resultados", filteredData);
+        handleHTTPResponse(res, "Se han encontrado los siguientes resultados", filteredDataInFavs);
 
     }
     catch(err){
