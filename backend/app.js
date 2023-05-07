@@ -12,6 +12,7 @@
 // Bibliotecas externas
 const express = require("express");
 const cors = require("cors");
+const morganBody = require("morgan-body");
 require("dotenv").config();
 
 // Bibliotecas propias
@@ -22,6 +23,8 @@ const { usersModel, storageModel } = require("./api/models");
 const { generateRandomPassword } = require("./api/utils/handleRandom.util");
 const { hashPassword } = require("./api/utils/handlePassword.util");
 const { setModelRelations } = require("./api/utils/handleRelations.util");
+const { INTERNAL_SERVER_ERROR } = require("./api/utils/handleResponse.util");
+const loggerStream = require("./api/utils/handleSlackLogger.util");
 
 /* Declaraciones Globales */
 const PORT = process.env.PORT || 3000;
@@ -34,6 +37,15 @@ const app = express();
 // Le instalamos las políticas
 app.use(cors());
 app.use(express.json());
+
+// Inicializamos el logger a Slack
+morganBody(app, {
+    noColors: true,
+    skip: function(req, res){
+        return res.statusCode < INTERNAL_SERVER_ERROR
+    },
+    stream: loggerStream
+});
 
 // Cargamos las rutas
 app.use("/", require("./api/routes"));
