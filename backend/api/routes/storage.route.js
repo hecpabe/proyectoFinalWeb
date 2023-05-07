@@ -21,6 +21,25 @@ const { authMiddleware } = require("../middleware/session.middleware");
 const router = express.Router();
 
 /* Rutas */
+// Subida de ficheros
+/**
+ *  @openapi
+ *  /storage/images:
+ *  post:
+ *      tags:
+ *      - Storage
+ *      summary: Upload image
+ *      description: Uploads a new image to the server
+ *      responses:
+ *          '200':
+ *              description: Returns the inserted object
+ *          '401':
+ *              description: Authentication / Authorization error
+ *          '500':
+ *              description: Server error
+ *      security:
+ *          - bearerAuth: []
+ */
 router.post("/images", authMiddleware, uploadMiddleware.single("image"), createStorage);
 
 /* Exportado de Módulo */

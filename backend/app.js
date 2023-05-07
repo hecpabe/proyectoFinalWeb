@@ -13,6 +13,7 @@
 const express = require("express");
 const cors = require("cors");
 const morganBody = require("morgan-body");
+const swaggerUI = require("swagger-ui-express")
 require("dotenv").config();
 
 // Bibliotecas propias
@@ -25,6 +26,7 @@ const { hashPassword } = require("./api/utils/handlePassword.util");
 const { setModelRelations } = require("./api/utils/handleRelations.util");
 const { INTERNAL_SERVER_ERROR } = require("./api/utils/handleResponse.util");
 const loggerStream = require("./api/utils/handleSlackLogger.util");
+const swaggerSpecs = require("./api/docs/swagger.docs");
 
 /* Declaraciones Globales */
 const PORT = process.env.PORT || 3000;
@@ -48,6 +50,7 @@ morganBody(app, {
 });
 
 // Cargamos las rutas
+app.use("/docs/", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 app.use("/", require("./api/routes"));
 app.use(express.static("./api/storage"));
 
