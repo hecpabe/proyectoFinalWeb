@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para la gestión de las relaciones de Sequelize
     Fecha: 5/5/2023
-    Última Modificación: 5/5/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -23,6 +23,13 @@ const {
 } = require("../models");
 
 /* Codificación de Funciones */
+/* Set Model Relations: Método con el que generamos las relaciones entre todos los modelos
+    Parámetros: Ninguno.
+    Retorno: Ninguno.
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const setModelRelations = () => {
 
     // Merchants (1) -> MerchantsPasswordRestorations (n)

@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un controlador para gestionar las peticiones de los usuarios
     Fecha: 18/4/2023
-    Última Modificación: 18/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -31,7 +31,16 @@ const NODEMAILER_USER = process.env.NODEMAILER_USER;
 const FAILED_LOGIN_MESSAGE = "El usuario o contraseña no son correctos, o la cuenta no está activada"
 
 /* Codificación de Funciones */
-// Obtención de todos los usuarios
+/* Get Users: Método con el que obtenemos todos los usuarios
+    Parámetros: 
+        0: [STRING] Rol del usuario por el que filtrar
+        1: [REQ] Request
+        2: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(n) n -> Cantidad de usuarios
+    Complejidad Espacial: O(n) n -> Cantidad de usuarios
+*/
 const getUsers = (rol) => async (req, res) => {
 
     try{
@@ -61,7 +70,16 @@ const getUsers = (rol) => async (req, res) => {
 
 }
 
-// Obtención de un usuario
+/* Get User: Método con el que obtenemos un usuario por ID y rol
+    Parámetros: 
+        0: [STRING] Rol por el que filtrar
+        1: [REQ] Request
+        2: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(n) n -> Cantidad de usuarios
+    Complejidad Espacial: O(n) n -> Cantidad de usuarios
+*/
 const getUser = (rol) => async (req, res) => {
 
     try{
@@ -112,7 +130,15 @@ const getUser = (rol) => async (req, res) => {
 
 }
 
-// Obtención de un usuario por sus preferencias
+/* Get Users By Preference: Método con el que obtenemos todos los usuarios con una determinada preferencia que permitan publicidad
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(n) n -> Cantidad de usuarios
+    Complejidad Espacial: O(n) n -> Cantidad de usuarios
+*/
 const getUsersByPreference = async (req, res) => {
 
     try{
@@ -152,7 +178,16 @@ const getUsersByPreference = async (req, res) => {
 
 }
 
-// Creación de un usuario
+/* Create User: Método con el que creamos un usuario
+    Parámetros: 
+        0: [STRING] Rol del nuevo usuario
+        1: [REQ] Request
+        2: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const createUser = (rol) => async (req, res) => {
 
     try{
@@ -220,7 +255,15 @@ const createUser = (rol) => async (req, res) => {
     
 }
 
-// Inicio de sesión de un usuario
+/* Login User: Método con el que iniciamos la sesión de un usuario
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const loginUser = async (req, res) => {
 
     try{
@@ -275,7 +318,15 @@ const loginUser = async (req, res) => {
 
 }
 
-// Solicitud de restaurar contraseña
+/* Restore Password Email: Método con el que iniciamos un proceso de recuperación de contraseña
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const restorePasswordEmail = async (req, res) => {
 
     try{
@@ -348,7 +399,15 @@ const restorePasswordEmail = async (req, res) => {
 
 }
 
-// Solicitud de restaurar contraseña (Confirmación de código)
+/* Restore Password Code: Método con el que autenticamos al usuario mediante el código para que pueda restaurar la contraseña
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const restorePasswordCode = async (req, res) => {
 
     try{
@@ -411,7 +470,15 @@ const restorePasswordCode = async (req, res) => {
 
 }
 
-// Solicitud de restaurar contraseña (Cambio de contraseña)
+/* Restore Password: Método con el que restauramos la contraseña de un usuario
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const restorePassword = async (req, res) => {
 
     try{
@@ -453,7 +520,15 @@ const restorePassword = async (req, res) => {
 
 }
 
-// Modificación de usuarios
+/* Update User: Método con el que modificamos un usuario
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const updateUser = async (req, res) => {
 
     try{
@@ -528,7 +603,15 @@ const updateUser = async (req, res) => {
 
 }
 
-// Eliminación de usuarios
+/* Delete User: Método con el que eliminamos a un usuario
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const deleteUser = async (req, res) => {
 
     try{
@@ -554,7 +637,16 @@ const deleteUser = async (req, res) => {
 
 }
 
-// Ascenso de usuarios
+/* Promote User: Método con el que ascendemos a un usuario
+    Parámetros: 
+        0: [STRING] Nuevo rol para el usuario
+        1: [REQ] Request
+        2: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const promoteUser = (newRol) => async (req, res) => {
 
     try{
@@ -590,7 +682,15 @@ const promoteUser = (newRol) => async (req, res) => {
 
 }
 
-// Activación de usuarios
+/* Activate User: Método con el que activamos a un usuario
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const activateUser = async (req, res) => {
 
     try{

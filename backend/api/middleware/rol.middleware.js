@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo que funcione de middleware para verificar el rol de la persona
     Fecha: 20/4/2023
-    Última Modificación: 20/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -14,7 +14,16 @@ const { handleHTTPError, UNAUTHORIZED, INTERNAL_SERVER_ERROR } = require("../uti
 const { jwtLogger } = require("../config/winstonLogger.config");
 
 /* Codificación de Funciones */
-// Comprobación de roles
+/* Check Rol: Método con el que comprobamos que un usuario tiene un rol que permite ejecutar una acción
+    Parámetros: 
+        0: [ARRAY] Lista de roles permitidos
+        1: [REQ] Request
+        2: [RES] Response
+    Retorno: Ninguno.
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const checkRol = (rolesAllowed) => (req, res, next) => {
 
     try{

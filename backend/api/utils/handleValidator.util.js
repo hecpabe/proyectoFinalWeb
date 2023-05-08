@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar las validaciones
     Fecha: 20/4/2023
-    Última Modificación: 20/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -16,6 +16,16 @@ const { validationResult } = require("express-validator");
 const { handleHTTPError } = require("./handleResponse.util")
 
 /* Codificación de Funciones */
+/* Validate Results: Método con el que validamos los datos de entrada de una petición
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+        2: [NEXT] Next
+    Retorno: Ninguno.
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const validateResults = (req, res, next) => {
 
     try{

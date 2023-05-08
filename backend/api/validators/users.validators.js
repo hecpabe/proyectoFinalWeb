@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para el middleware de validación de usuarios
     Fecha: 20/4/2023
-    Última Modificación: 20/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de bibliotecas */

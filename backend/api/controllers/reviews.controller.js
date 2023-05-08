@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar el controlador de reseñas
     Fecha: 30/4/2023
-    Última Modificación: 30/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -14,7 +14,7 @@ const { matchedData } = require("express-validator");
 const { Op } = require("sequelize");
 
 // Bibliotecas propias
-const { reviewsModel, webpagesModel, usersModel } = require("../models");
+const { reviewsModel, webpagesModel } = require("../models");
 const { handleHTTPResponse, handleHTTPError, NOT_FOUND, INTERNAL_SERVER_ERROR, UNAUTHORIZED } = require("../utils/handleResponse.util");
 const { reviewsLogger } = require("../config/winstonLogger.config");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");
@@ -23,7 +23,16 @@ const { getProperties } = require("../utils/handlePropertiesEngine.util");
 const PROPERTIES = getProperties();
 
 /* Codificación de Funciones */
-// Obtención de las reseñas de una página / usuario
+/* Get Reviews: Método con el que obtenemos todas las reviews de una página / usuario
+    Parámetros: 
+        0: [STRING] Tipo de obtención (ususario / página)
+        1: [REQ] Request
+        2: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(n) n -> Cantidad de reviews
+*/
 const getReviews = (type) => async (req, res) => {
 
     try{
@@ -52,7 +61,15 @@ const getReviews = (type) => async (req, res) => {
 
 }
 
-// Creación de una reseña
+/* Create Review: Método con el que creamos una review
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const createReview = async (req, res) => {
 
     try{
@@ -99,7 +116,15 @@ const createReview = async (req, res) => {
 
 }
 
-// Modificación de una reseña
+/* Update Review: Método con el que modificamos una reseña
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const updateReview = async (req, res) => {
 
     try{
@@ -141,7 +166,15 @@ const updateReview = async (req, res) => {
 
 }
 
-// Eliminación de una reseña
+/* Delete Review: Método con el que eliminamos una reseña
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const deleteReview = async (req, res) => {
 
     try{

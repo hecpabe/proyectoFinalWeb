@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para la ruta de favoritos
     Fecha: 31/3/2023
-    Última Modificación: 31/3/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

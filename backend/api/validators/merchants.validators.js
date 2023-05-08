@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar los validadores de los comerciantes
     Fecha: 25/4/2023
-    Última Modificación: 25/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

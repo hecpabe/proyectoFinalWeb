@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar las validaciones de las publicaciones
     Fecha: 5/5/2023
-    Última Modificación: 5/5/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

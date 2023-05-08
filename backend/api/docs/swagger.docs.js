@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para la configuración de Swagger
     Fecha: 7/5/2023
-    Última Modificación: 7/5/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

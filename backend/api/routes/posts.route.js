@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para las rutas de los posts
     Fecha: 5/5/2023
-    Última Modiifcación: 5/5/2023
+    Última Modiifcación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

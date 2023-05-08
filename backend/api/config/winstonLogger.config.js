@@ -5,14 +5,14 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar el logger del servidor
     Fecha: 18/4/2023
-    Última Modificación: 18/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
 // Bibliotecas externas
-const { createLogger, format, transports, config } = require("winston");
+const { createLogger, format, transports } = require("winston");
 const { MESSAGE } = require("triple-beam");
-const { splat, combine, timestamp, label, printf, simple, colorize } = format;
+const { combine, timestamp, label } = format;
 
 /* Formatos */
 /* const generalFormat = printf(({ level, message, timestamp }) => {

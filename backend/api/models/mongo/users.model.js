@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar el modelo de users para MongoDB con Mongoose
     Fecha: 18/4/2023
-    Última Modificación: 18/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

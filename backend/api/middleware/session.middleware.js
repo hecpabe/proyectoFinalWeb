@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Cremaos un módulo que actúe como middleware para validar la autenticación de los usuarios
     Fecha: 20/4/2023
-    Última Modificación: 20/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -26,7 +26,15 @@ const ROLES = {
 };
 
 /* Codificación de Funciones Públicas */
-// Autenticación mediante el token JWT
+/* Auth Middleware: Método con el que autenticamos a un usuario mediante el token JWT
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const authMiddleware = async (req, res, next) => {
 
     try{
@@ -84,7 +92,15 @@ const authMiddleware = async (req, res, next) => {
 
 }
 
-// Autenticación para la activación de cuenta mediante el token JWT
+/* Activate Account Middleware: Método con el que autenticamos una activación de cuenta mediante el token JWT
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const activateAccountMiddleware = async (req, res, next) => {
 
     try{
@@ -124,7 +140,15 @@ const activateAccountMiddleware = async (req, res, next) => {
 
 }
 
-// Autenticación de recuperación de contraseña (Código) mediante el token JWT
+/* Password Restoration Email Auth Middleware: Método con el que autenticamos a un usuario que ha solicitado una recuperación de contraseña
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const passwordRestorationEmailAuthMiddleware = (target) => async (req, res, next) => {
 
     try{
@@ -179,7 +203,15 @@ const passwordRestorationEmailAuthMiddleware = (target) => async (req, res, next
 
 }
 
-// Autenticación de recuperación de contraseña (Contraseña) mediante el token JWT
+/* Password Restoration Password Auth Middleware: Método con el que autenticamos a un usuario ya verificado que ya puede restablecer la contraseña
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const passwordRestorationPasswordAuthMiddleware = (target) => async (req, res, next) => {
 
     try{
@@ -226,7 +258,15 @@ const passwordRestorationPasswordAuthMiddleware = (target) => async (req, res, n
 
 }
 
-// Función con la que comprobamos que el usuario que está haciendo una acción es él mismo o uno con un permiso superior
+/* Check Same Or Greater Admin Rol: Método con el que comprobamos que el usuario que realiza una acción es él mismo o uno con permiso superior
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const checkSameOrGreaterAdminRol = (target) => async (req, res, next) => {
 
     try{
@@ -267,7 +307,15 @@ const checkSameOrGreaterAdminRol = (target) => async (req, res, next) => {
 
 }
 
-// Autenticación para la activación de un comerciante mediante el token JWT
+/* Activate Merchant Middleware: Método con el que autenticamos una activación de comerciante mediante el token JWT
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const activateMerchantMiddleware = async (req, res, next) => {
 
     try{

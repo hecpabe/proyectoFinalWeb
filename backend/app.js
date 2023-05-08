@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Fichero de arranque del backend
     Fecha: 30/3/2023
-    Última Modificación: 30/3/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -64,7 +64,7 @@ app.listen(PORT, async () => {
             createOwnerUser();
     }
     else{
-        await connectToMySQL();
+        connectToMySQL();
         //await syncSequelize();
         setModelRelations();
     }
@@ -74,7 +74,14 @@ app.listen(PORT, async () => {
 });
 
 /* Codificación de Funciones */
-// Comprobación de existencia de usuarios de un rol
+/* Exist Users: Método con el que comprobamos si existen usuarios de un determinado rol
+    Parámetros: 
+        0: [STRING] Rol por el que buscar
+    Retorno: TRUE si existen y FALSe si no
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(n) n -> Cantidad de usuarios que existen
+*/
 const existUsers = async (rol) => {
 
     const data = await usersModel.selectAllWhere({ rol: rol });
@@ -82,7 +89,13 @@ const existUsers = async (rol) => {
 
 }
 
-// Creación del primer usuario
+/* Create Owner User: Método con el que generamos un nuevo usuario con permisos de owner
+    Parámetros: Ninguno
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos debe haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const createOwnerUser = async () => {
 
     // Variables necesarias
@@ -107,6 +120,13 @@ const createOwnerUser = async () => {
 }
 
 // Creación de la imagen de usuario por defecto
+/* Create Default User Image: Método con el que subimos al sistema la imagen de usuario por defecto
+    Parámetros: Ninguno.
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos debe haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const createDefaultUserImage = async () => {
 
     const fileData = {
@@ -119,6 +139,13 @@ const createDefaultUserImage = async () => {
 }
 
 // Sincronización de los modelos con la base de datos
+/* Sync Sequelize: Método con el que sincronizamos la base de datos con los modelos de sequelize
+    Parámetros: Ninguno.
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos debe haber sido inicializada y la base de datos debe estar limpia
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const syncSequelize = async () => {
 
     try{
@@ -142,3 +169,6 @@ const syncSequelize = async () => {
     }
 
 }
+
+/* Exportado de Módulo */
+module.exports = app;

@@ -6,7 +6,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar las rutas de autenticación de usuarios
     Fecha: 30/3/2023
-    Última Modificación: 30/3/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

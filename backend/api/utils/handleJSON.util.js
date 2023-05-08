@@ -5,11 +5,19 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos una utilidad para normalizar los JSONs
     Fecha: 18/4/2023
-    Última Modificación: 18/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Codificación de Funciones */
 // Función para normalizar un JSON de datos de tipo MongoDB a uno que admita Sequelize
+/* Normalize JSON For Sequelize: Método con el que normalizamos un JSON de datos a un formato que admita Sequelize
+    Parámetros: 
+        0: [JSON] JSON a transformar
+    Retorno: [JSON] JSON Adaptado
+    Precondición: Ninguna.
+    Complejidad Temporal: O(n) n -> Cantidad total de entradas y subentradas que tenga el JSON
+    Complejidad Espacial: O(n) n -> Cantidad total de entradas y subentradas que tenga el JSON
+*/
 const normalizeJSONForSequelize = (json) => {
 
     // Variables necesarias

@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para la gestión de la ruta de comerciantes
     Fecha: 2/4/2023
-    Última Modificación: 2/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

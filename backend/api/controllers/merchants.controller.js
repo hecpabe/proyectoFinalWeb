@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar el controlador de los comerciantes
     Fecha: 25/4/2023
-    Última Modificación: 25/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -30,7 +30,15 @@ const FAILED_LOGIN_MESSAGE = "El usuario o contraseña no son correctos, o la cu
 const RESTORE_PASSWORD_CODE_LENGTH = 6;
 
 /* Codificación de Funciones */
-// Obtención de todos los comerciantes
+/* Get Merchants: Método con el que obtenemos todos los comerciantes
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(n) n -> Cantidad de comerciantes
+    Complejidad Espacial: O(n) n -> Cantidad de comerciantes
+*/
 const getMerchants = async (req, res) => {
 
     try{
@@ -55,7 +63,15 @@ const getMerchants = async (req, res) => {
 
 }
 
-// Obtención de un comerciante
+/* Get Merchant: Método con el que obtenemos un comerciante por ID
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const getMerchant = async (req, res) => {
 
     try{
@@ -84,7 +100,15 @@ const getMerchant = async (req, res) => {
 
 }
 
-// Creación de un comerciante
+/* Create Merchant: Método con el que creamos un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const createMerchant = async(req, res) => {
 
     try{
@@ -156,7 +180,15 @@ const createMerchant = async(req, res) => {
 
 }
 
-// Login de un comerciante
+/* Login Merchant: Método con el que iniciamos la sesión de un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const loginMerchant = async (req, res) => {
 
     try{
@@ -215,7 +247,15 @@ const loginMerchant = async (req, res) => {
 
 }
 
-// Recuperación de contraseña (Email) de un comerciante
+/* Restore Password Email: Método con el que iniciamos la recuperación de contraseña de un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const restorePasswordEmail = async (req, res) => {
 
     try{
@@ -288,7 +328,15 @@ const restorePasswordEmail = async (req, res) => {
 
 }
 
-// Recuperación de contraseña (Código) de un comerciante
+/* Restore Password Code: Método con el que autenticamos al comerciante mediante el código para recuperar la contraseña
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const restorePasswordCode = async (req, res) => {
 
     try{
@@ -351,7 +399,15 @@ const restorePasswordCode = async (req, res) => {
 
 }
 
-// Recuperación de contraseña (Contraseña) de un comerciante
+/* Restore Password: Método con el que recuperamos la contraseña de un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const restorePassword = async (req, res) => {
 
     try{
@@ -393,7 +449,15 @@ const restorePassword = async (req, res) => {
 
 }
 
-// Modificación de un comerciante
+/* Update Merchant: Método con el que modificamos a un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const updateMerchant = async (req, res) => {
 
     try{
@@ -462,7 +526,15 @@ const updateMerchant = async (req, res) => {
 
 }
 
-// Eliminación de un comerciante
+/* Delete Merchant: Método con el que eliminamos a un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const deleteMerchant = async (req, res) => {
 
     try{
@@ -488,7 +560,15 @@ const deleteMerchant = async (req, res) => {
 
 }
 
-// Activación de un comerciante
+/* Activate Merchant: Método con el que activamos a un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const activateMerchant = async (req, res) => {
 
     try{
@@ -517,7 +597,15 @@ const activateMerchant = async (req, res) => {
 
 }
 
-// Aceptación de un comerciante
+/* Accept Merchant: Método con el que aceptamos a un comerciante
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const acceptMerchant = async (req, res) => {
 
     try{

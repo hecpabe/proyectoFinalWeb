@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Ceamos un módulo para gestionar los errores HTTP
     Fecha: 18/4/2023
-    Última Modificación: 20/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Declaraciones Constantes */
@@ -18,6 +18,16 @@ const NOT_FOUND = 404;
 const INTERNAL_SERVER_ERROR = 500;
 
 /* Codificación de Funciones */
+/* Handle HTTP Response: Método con el que respondemos a una petición
+    Parámetros: 
+        0: [RES] Response
+        1: [STRING] Mensaje de respuesta
+        2: [JSON] Contenido adjunto a la respuesta
+    Retorno: Ninguno.
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const handleHTTPResponse = (res, message, content = {}) => {
     res.send({
         "ERROR": false,
@@ -26,6 +36,16 @@ const handleHTTPResponse = (res, message, content = {}) => {
     });
 }
 
+/* Handle HTTP Error: Método con el que respondemos a una petición con un error
+    Parámetros: 
+        0: [RES] Response
+        1: [STRING] Mensaje de respuesta
+        2: [INT] Código de respuesta
+    Retorno: Ninguno.
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const handleHTTPError = (res, message, code = BAD_REQUEST) => {
     res.status(code).send({
         "ERROR": true,

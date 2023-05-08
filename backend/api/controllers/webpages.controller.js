@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar el controlador de las páginas de comercios
     Fecha: 28/4/2023
-    Última Modificación: 28/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -24,7 +24,15 @@ const { sequelize } = require("../config/mysql.config");
 const PROPERTIES = getProperties();
 
 /* Codificación de Funciones */
-// Obtención de todas las páginas
+/* Get Webpages: Método con el que obtenemos todas las páginas
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(n) n -> Cantidad de páginas
+*/
 const getWebpages = async (req, res) => {
 
     try{
@@ -59,7 +67,15 @@ const getWebpages = async (req, res) => {
 
 }
 
-// Obtención de una página por id
+/* Get Webpage: Método con el que obtenemos una página por ID
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const getWebpage = async (req, res) => {
 
     try{
@@ -109,7 +125,15 @@ const getWebpage = async (req, res) => {
 
 }
 
-// Obtención de páginas filtradas
+/* Get Filtered Webpages: Método con el que obtenemos todas las páginas filtradas
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(n) n -> Cantidad de páginas
+*/
 const getFilteredWebpages = async (req, res) => {
 
     try{
@@ -181,7 +205,15 @@ const getFilteredWebpages = async (req, res) => {
 
 }
 
-// Obtención de páginas filtradas para usuarios registrados
+/* Get Filtered Webpages As Logged User: Método con el que obtenemos todas las páginas filtradas como un usuario logeado
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(2n) n -> Cantidad de páginas
+    Complejidad Espacial: O(n) n -> Cantidad de páginas
+*/
 const getFilteredWebpagesAsLoggedUser = async (req, res) => {
 
     try{
@@ -274,7 +306,15 @@ const getFilteredWebpagesAsLoggedUser = async (req, res) => {
 
 }
 
-// Creación de un comercio
+/* Create Webpage: Método con el que creamos una nueva página
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const createWebpage = async (req, res) => {
 
     try{
@@ -300,7 +340,15 @@ const createWebpage = async (req, res) => {
 
 }
 
-// Modificación de un comercio
+/* Update Webpage: Método con el que modificamos una página
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const updateWebpage = async (req, res) => {
 
     try{
@@ -340,7 +388,15 @@ const updateWebpage = async (req, res) => {
 
 }
 
-// Eliminación de un comercio
+/* Delete Webpage: Método con el que eliminamos una página
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const deleteWebpage = async (req, res) => {
 
     try{

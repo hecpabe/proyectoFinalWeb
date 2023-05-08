@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para la trabajar con las contraseñas
     Fecha: 18/4/2023
-    Última Modificación: 18/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -16,7 +16,14 @@ const bcryptjs = require("bcryptjs");
 const SALT_ROUNDS = 10;
 
 /* Codificación de Funciones */
-// Hasheo de contraseñas
+/* Hash Passwod: Método con el que hasheamos una contraseña con bcrypt
+    Parámetros: 
+        0: [STRING] Contraseña en texto claro
+    Retorno: [HASH] Contraseña hasheada
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const hashPassword = async (password) => {
 
     const hash = await bcryptjs.hash(password, SALT_ROUNDS);
@@ -25,6 +32,15 @@ const hashPassword = async (password) => {
 }
 
 // Comparación de contraseña con su hash
+/* Compare Password: Método con el que verificamos una contraseña en texto claro con un hash
+    Parámetros: 
+        0: [STRING] Contraseña en texto claro
+        1: [HASH] Contraseña hasheada con la que comprobar
+    Retorno: [BOOL] Resultado de comparación de contraseña
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const comparePassword = async (password, hash) => {
 
     const result = await bcryptjs.compare(password, hash);

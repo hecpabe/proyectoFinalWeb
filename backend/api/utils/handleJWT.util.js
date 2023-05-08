@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Cremaos una utilidad para gestionar los tokens de JWT
     Fecha: 18/4/2023
-    Última Modificación: 18/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -25,7 +25,14 @@ const PASSWORD_RESTORATION_CODE_MAX_ATTEMPTS = 5;
 const PROPERTIES = getProperties();
 
 /* Codificación de Funciones */
-// Creación del token de usuarios
+/* Token Sign: Método con el que generamos tokens JWT para la autenticación de usuarios
+    Parámetros: 
+        0: [USER] Usuario con el que generar el token
+    Retorno: [TOKEN] Token generado
+    Precondición: El usuario tiene que tener una ID y un rol
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const tokenSign = (user) => {
 
     const sign = jwt.sign(
@@ -43,7 +50,14 @@ const tokenSign = (user) => {
 
 }
 
-// Creación del token de recuperación de contraseñas (código)
+/* Token Sign Restoration Code: Método con el que generamos tokens JWT para la autenticación de usuarios que pidan la recuperación de contraseña
+    Parámetros: 
+        0: [USER] Usuario con el que generar el token
+    Retorno: [TOKEN] Token generado
+    Precondición: El usuario tiene que tener una ID, un código, una contraseña, la ID de recuperación de contraseña asociada y el número máximo de intentos permitidos
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const tokenSignRestorationCode = (user) => {
 
     const sign = jwt.sign(
@@ -65,6 +79,14 @@ const tokenSignRestorationCode = (user) => {
 }
 
 // Creación del token de recuperación de contraseñas (contraseña)
+/* Token Sign Restoration Password: Método con el que generamos tokens JWT para la autenticación de usuarios que pueden restablecer su contraseña
+    Parámetros: 
+        0: [USER] Usuario con el que generar el token
+    Retorno: [TOKEN] Token generado
+    Precondición: El usuario tiene que tener una ID, una contraseña y una ID de recuperación de contraseña asociada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const tokenSignRestorationPassword = (user) => {
 
     const sign = jwt.sign(
@@ -83,7 +105,14 @@ const tokenSignRestorationPassword = (user) => {
 
 }
 
-// Verificación de tokens
+/* Verify Token: Método con el que verificamos la validez de un token JWT y lo descodificamos
+    Parámetros: 
+        0: [USER] Usuario con el que generar el token
+    Retorno: [JSON] Datos extraídos del token
+    Precondición: Ninguna
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const verifyToken = (JWTToken) => {
 
     try{

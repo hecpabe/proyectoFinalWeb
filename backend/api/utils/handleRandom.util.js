@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos una utilidad para gestionar la generación aleatoria de nuestro sistema
     Fecha: 20/4/2023
-    Última Modificación: 20/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Declaraciones Globales */
@@ -18,12 +18,26 @@ const ALPHANUMERIC = ALPHABET + DIGITS;
 const ALL_CHARS = ALPHANUMERIC + SPECIAL_CHARACTERS;
 
 /* Codificación de Funciones */
-// Obtención de un elemento aleatorio de un array
+/* Get Random Element: Método con el que obtenemos un elemento aleatorio de un array
+    Parámetros: 
+        0: [ARRAY] Array del que extraer el elemento aleatorio
+    Retorno: [ELEMENTO] Elemento obtenido de forma aleatoria
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const getRandomElement = (array) => {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-// Generación de un código aleatorio
+/* Generate Random Code: Método con el que generamos un código aleatorio
+    Parámetros: 
+        0: [INT] Longitud del código a generar
+    Retorno: [STRING] Código generado
+    Precondición: Ninguna.
+    Complejidad Temporal: O(n) n -> Longitud del código
+    Complejidad Espacial: O(n) n -> Longitud del ćodigo
+*/
 const generateRandomCode = (length) => {
 
     // Variables necesarias
@@ -37,6 +51,18 @@ const generateRandomCode = (length) => {
 }
 
 // Generación de una contraseña aleatoria
+/* Generate Random Password: Método con el que generamos una contraseña aleatoria
+    Parámetros: 
+        0: [INT] Longitud de la contraseña
+        1: [INT] Cantidad de mayúsculas
+        2: [INT] Cantidad de minúsculas
+        3: [INT] Cantidad de dígitos
+        4: [INT] Cantidad de carácteres especiales
+    Retorno: [STRING] Contraseña generada
+    Precondición: Ninguna.
+    Complejidad Temporal: O(n) n -> Longitud de la contraseña
+    Complejidad Espacial: O(n) n -> Longitud de la contraseña
+*/
 const generateRandomPassword = (length, nUppercase, nLowercase, nDigits, nSpecChars) => {
 
     // Variables necesarias

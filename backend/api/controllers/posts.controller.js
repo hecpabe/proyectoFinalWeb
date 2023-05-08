@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para la gestión del controlador de posts
     Fecha: 5/5/2023
-    Última Fecha: 5/5/2023
+    Última Fecha: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -19,11 +19,18 @@ const { postsLogger } = require("../config/winstonLogger.config");
 const { getProperties } = require("../utils/handlePropertiesEngine.util");
 
 /* Declaraciones Constantes */
-const DB_ENGINE = process.env.DB_ENGINE;
 const PROPERTIES = getProperties();
 
 /* Codificación de Funciones */
-// Obtención de todos los posts
+/* Get Posts: Método con el que obtenemos todos los posts
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(n) n -> Cantidad de posts
+*/
 const getPosts = async (req, res) => {
 
     try{
@@ -57,7 +64,15 @@ const getPosts = async (req, res) => {
 
 }
 
-// Obtención de un post por ID
+/* Get Post: Método con el que obtenemos un post
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const getPost = async (req, res) => {
 
     try{
@@ -92,7 +107,15 @@ const getPost = async (req, res) => {
 
 }
 
-// Obtención de todos los posts de una página
+/* Get Webpage Posts: Método con el que obtenemos todos los posts de una página
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(n) n -> Cantidad de posts
+*/
 const getWebpagePosts = async (req, res) => {
 
     try{
@@ -127,7 +150,15 @@ const getWebpagePosts = async (req, res) => {
 
 }
 
-// Creación de posts
+/* Create Post: Método con el que creamos un post
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const createPost = async (req, res) => {
 
     try{
@@ -180,7 +211,15 @@ const createPost = async (req, res) => {
 
 }
 
-// Modificación de posts
+/* Update Post: Método con el que modificamos un post
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const updatePost = async (req, res) => {
 
     try{
@@ -241,7 +280,15 @@ const updatePost = async (req, res) => {
 
 }
 
-// Eliminación de posts
+/* Delete Post: Método con el que eliminamos un post
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const deletePost = async (req, res) => {
 
     try{

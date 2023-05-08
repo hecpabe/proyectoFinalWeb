@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar el modelo de recuperación de contraseñas para MongoDB
     Fecha: 24/4/2023
-    Última Modificación: 24/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

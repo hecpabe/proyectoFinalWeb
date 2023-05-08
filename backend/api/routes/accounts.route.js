@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar las rutas de gestión básica de cuentas, como puede ser gestionar la activación o recuperar la contraseña
     Fecha: 23/4/2023
-    Última Modificación: 23/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */

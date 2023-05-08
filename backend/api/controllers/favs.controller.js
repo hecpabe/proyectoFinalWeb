@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar el controlador de los favoritos
     Fecha: 7/5/2023
-    Última Modificación: 7/5/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -22,7 +22,15 @@ const { getProperties } = require("../utils/handlePropertiesEngine.util");
 const PROPERTIES = getProperties();
 
 /* Codificación de Funciones */
-// Obtención de todos los favoritos
+/* Get Favs: Método con el que obtenemos todos los favoritos
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(n) n -> Cantidad de favoritos
+    Complejidad Espacial: O(n) n -> Cantidad de favoritos
+*/
 const getFavs = async (req, res) => {
 
     try{
@@ -51,7 +59,16 @@ const getFavs = async (req, res) => {
 
 }
 
-// Obtención de todos los favoritos de un usuario
+/* Get Favs By User: Método con el que obtenemos todos los favoritos de un usuario / comercio
+    Parámetros: 
+        0: [STRING] Tipo de búsqueda (usuario / comerciante)
+        1: [REQ] Request
+        2: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(n) n -> Cantidad de favoritos
+    Complejidad Espacial: O(n) n -> Cantidad de favoritos
+*/
 const getFavsByUser = (type) => async (req, res) => {
 
     try{
@@ -85,7 +102,15 @@ const getFavsByUser = (type) => async (req, res) => {
 
 }
 
-// Obtención de un favorito por ID
+/* Get Fav: Método con el que obtenemos un favorito por ID
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const getFav = async (req, res) => {
 
     try{
@@ -115,7 +140,15 @@ const getFav = async (req, res) => {
 
 }
 
-// Comprobación de que un favorito existe
+/* Check Fav Exists: Método con el que comprobamos si existe un favorito
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(n) n -> Cantidad de favoritos
+    Complejidad Espacial: O(n) n -> Cantidad de favoritos
+*/
 const checkFavExists = async (req, res) => {
 
     try{
@@ -149,7 +182,15 @@ const checkFavExists = async (req, res) => {
 
 }
 
-// Creación de un favorito
+/* Create Fav: Método con el que creamos un favorito
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1) 
+    Complejidad Espacial: O(1)
+*/
 const createFav = async (req, res) => {
 
     try{
@@ -194,7 +235,15 @@ const createFav = async (req, res) => {
 
 }
 
-// Eliminación de un favorito
+/* Delete Fav: Método con el que eliminamos un favorito
+    Parámetros: 
+        0: [REQ] Request
+        1: [RES] Response
+    Retorno: Ninguno.
+    Precondición: La conexión con la base de datos tiene que haber sido inicializada
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const deleteFav = async (req, res) => {
 
     try{

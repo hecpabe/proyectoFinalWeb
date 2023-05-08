@@ -5,7 +5,7 @@
     Nombre: Héctor Paredes Benavides
     Descripción: Creamos un módulo para gestionar la conectividad con la base de datos en MongoDB
     Fecha: 3/4/2023
-    Última Modificación: 3/4/2023
+    Última Modificación: 8/5/2023
 */
 
 /* Importado de Bibliotecas */
@@ -19,6 +19,13 @@ const { mongoDBLogger } = require("../config/winstonLogger.config");
 const DB_URI = process.env.MONGODB_URI;
 
 /* Codificación de Funciones */
+/* Connect To MongoDB: Método con el que inicializamos la conexión con MongoDB
+    Parámetros: Ninguno.
+    Retorno: Ninguno.
+    Precondición: Ninguna.
+    Complejidad Temporal: O(1)
+    Complejidad Espacial: O(1)
+*/
 const connectToMongoDB = () => {
 
     // Inicializzamos la conexión
